@@ -101,5 +101,3 @@ func Configure(app *gin.Engine) {
 	// }
 
 }
-
-
