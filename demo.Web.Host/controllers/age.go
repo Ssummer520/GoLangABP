@@ -4,8 +4,7 @@ import "github.com/gin-gonic/gin"
 import . "GoLangABP/demo.Web.Host/conf"
 import . "GoLangABP/demo.Core/Model"
 
-
-// AgeHandler
+// GetAgeHandler AgeHandler
 // @Summary  获取最新age
 // @Tags     AgeController 年龄相关
 // @Accept   application/json
