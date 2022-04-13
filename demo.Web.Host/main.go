@@ -12,23 +12,23 @@ import (
 	"os"
 )
 
-// @title ExamCodeAboutTeslaByGin
-// @version 1.0
-// @description ExamCodeAboutTeslaByGin
-// @termsOfService http://swagger.io/terms/
-// @contact.name 1362
-// @contact.url http://www.swagger.io/support
-// @contact.email support@swagger.io
-// @license.name Apache 2.0
-// @license.url http://www.apache.org/licenses/LICENSE-2.0.html
-// @host localhost:8888
+// @title           ExamCodeAboutTeslaByGin
+// @version         1.0
+// @description     ExamCodeAboutTeslaByGin
+// @termsOfService  http://swagger.io/terms/
+// @contact.name    1362
+// @contact.url     http://www.swagger.io/support
+// @contact.email   support@swagger.io
+// @license.name    Apache 2.0
+// @license.url     http://www.apache.org/licenses/LICENSE-2.0.html
+// @host            localhost:8889
 // @BasePath
-/* @host 124.220.12.138:8888*/
-/* @host localhost:8888*/
+/*  @host 124.220.12.138:8888*/
+/*  @host localhost:8888*/
 func main() {
-	/* @host 124.220.12.138:8888*/
+	/*  @host 124.220.12.138:8888*/
 	envPort := ""
-	gin.SetMode(gin.ReleaseMode)
+	gin.SetMode(gin.DebugMode)
 	if gin.Mode() == gin.ReleaseMode {
 		envPort = os.Getenv("ASPNETCORE_PORT")
 	}
@@ -48,6 +48,6 @@ func main() {
 		fmt.Println(gin.Mode())
 		r.Run(":" + envPort)
 	} else {
-		r.Run(":8888")
+		r.Run(":8889")
 	}
 }

@@ -40,26 +40,6 @@ const docTemplate = `{
                 "responses": {}
             },
             "post": {
-                "consumes": [
-                    "application/json"
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "tags": [
-                    "AgeController 年龄相关"
-                ],
-                "summary": "设置最新age",
-                "parameters": [
-                    {
-                        "description": "请求参数",
-                        "name": "object",
-                        "in": "body",
-                        "schema": {
-                            "$ref": "#/definitions/models.AgeModel"
-                        }
-                    }
-                ],
                 "responses": {}
             }
         },
@@ -108,24 +88,13 @@ const docTemplate = `{
                 "responses": {}
             }
         }
-    },
-    "definitions": {
-        "models.AgeModel": {
-            "type": "object",
-            "properties": {
-                "age": {
-                    "description": "年龄",
-                    "type": "integer"
-                }
-            }
-        }
     }
 }`
 
 // SwaggerInfo holds exported Swagger Info so clients can modify it
 var SwaggerInfo = &swag.Spec{
 	Version:          "1.0",
-	Host:             "124.220.12.138:8888",
+	Host:             "localhost:8889",
 	BasePath:         "",
 	Schemes:          []string{},
 	Title:            "ExamCodeAboutTeslaByGin",

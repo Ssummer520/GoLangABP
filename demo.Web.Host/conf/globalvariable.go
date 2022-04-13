@@ -1,9 +1,9 @@
 package conf
 
 import (
+	. "GoLangABP/demo.Core/Model"
 	"sync"
 )
-import . "GoLangABP/demo.Core/Model"
 
 var CarInventoryModel CarInventory
 var CarLock sync.RWMutex

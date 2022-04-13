@@ -15,7 +15,7 @@
         },
         "version": "1.0"
     },
-    "host": "124.220.12.138:8888",
+    "host": "localhost:8889",
     "paths": {
         "/age": {
             "get": {
@@ -32,26 +32,6 @@
                 "responses": {}
             },
             "post": {
-                "consumes": [
-                    "application/json"
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "tags": [
-                    "AgeController 年龄相关"
-                ],
-                "summary": "设置最新age",
-                "parameters": [
-                    {
-                        "description": "请求参数",
-                        "name": "object",
-                        "in": "body",
-                        "schema": {
-                            "$ref": "#/definitions/models.AgeModel"
-                        }
-                    }
-                ],
                 "responses": {}
             }
         },
@@ -98,17 +78,6 @@
                 ],
                 "summary": "获取最新售卖率",
                 "responses": {}
-            }
-        }
-    },
-    "definitions": {
-        "models.AgeModel": {
-            "type": "object",
-            "properties": {
-                "age": {
-                    "description": "年龄",
-                    "type": "integer"
-                }
             }
         }
     }
