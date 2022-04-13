@@ -40,6 +40,26 @@ const docTemplate = `{
                 "responses": {}
             },
             "post": {
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "AgeController 年龄相关"
+                ],
+                "summary": "设置最新age",
+                "parameters": [
+                    {
+                        "description": "请求参数",
+                        "name": "object",
+                        "in": "body",
+                        "schema": {
+                            "$ref": "#/definitions/Model.AgeModel"
+                        }
+                    }
+                ],
                 "responses": {}
             }
         },
@@ -86,6 +106,17 @@ const docTemplate = `{
                 ],
                 "summary": "获取最新售卖率",
                 "responses": {}
+            }
+        }
+    },
+    "definitions": {
+        "Model.AgeModel": {
+            "type": "object",
+            "properties": {
+                "age": {
+                    "description": "年龄",
+                    "type": "integer"
+                }
             }
         }
     }

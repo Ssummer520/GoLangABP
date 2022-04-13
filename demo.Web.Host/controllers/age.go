@@ -25,8 +25,8 @@ func GetAgeHandler(c *gin.Context) {
 // @Tags     AgeController 年龄相关
 // @Accept   application/json
 // @Produce  application/json
-
-// @Router   /age [post]
+// @Param object body AgeModel false "请求参数"
+// @Router /age [post]
 func AddAgeHandler(c *gin.Context) {
 	ageModel := AgeModel{}
 	err := c.ShouldBind(&ageModel)
