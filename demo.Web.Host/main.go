@@ -37,7 +37,6 @@ func main() {
 		envPort = os.Getenv("ASPNETCORE_PORT")
 	}
 
-
 	CarInventoryModel.X = 2
 	r := gin.New()
 	Configure(r)
