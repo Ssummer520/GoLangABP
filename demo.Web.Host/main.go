@@ -40,13 +40,6 @@ func main() {
 	CarInventoryModel.X = 2
 	r := gin.New()
 	Configure(r)
-	r.GET("/age", GetAgeHandler)
-	r.GET("/car", GetCarHandler)
-	r.POST("/age", AddAgeHandler)
-	r.GET("/rate", GetRateHandler)
-	r.GET("/buffer", GetBufferHandler)
-	r.GET("/name", index.GetNameHandler)
-	r.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
 	r.Use(cors.Default())
 	r.Use(gin.Recovery())
 	if gin.Mode() == gin.ReleaseMode {
@@ -57,7 +50,7 @@ func main() {
 	}
 }
 
-func Configure(app *gin.Engine) {
+func Configure(r *gin.Engine) {
 	//controller declare
 	var index Index
 
@@ -98,5 +91,13 @@ func Configure(app *gin.Engine) {
 	// if err != nil {
 	// 	log.Fatal("RabbitMQ fatal:", err)
 	// }
+
+	r.GET("/age", GetAgeHandler)
+	r.GET("/car", GetCarHandler)
+	r.POST("/age", AddAgeHandler)
+	r.GET("/rate", GetRateHandler)
+	r.GET("/buffer", GetBufferHandler)
+	r.GET("/name", index.GetNameHandler)
+	r.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
 
 }
