@@ -93,6 +93,21 @@ const docTemplate = `{
                 "responses": {}
             }
         },
+        "/name": {
+            "get": {
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Index 依赖注入相关"
+                ],
+                "summary": "获取最新age",
+                "responses": {}
+            }
+        },
         "/rate": {
             "get": {
                 "consumes": [
