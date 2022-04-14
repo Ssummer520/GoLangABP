@@ -15,7 +15,7 @@
         },
         "version": "1.0"
     },
-    "host": "localhost:8889",
+    "host": "localhost:8181",
     "paths": {
         "/age": {
             "get": {
@@ -85,6 +85,31 @@
                 "responses": {}
             }
         },
+        "/login": {
+            "post": {
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "UserLogin 登录相关"
+                ],
+                "summary": "用户登录",
+                "parameters": [
+                    {
+                        "description": "请求参数",
+                        "name": "object",
+                        "in": "body",
+                        "schema": {
+                            "$ref": "#/definitions/dto.UserLoginInputDto"
+                        }
+                    }
+                ],
+                "responses": {}
+            }
+        },
         "/name": {
             "get": {
                 "consumes": [
@@ -123,6 +148,17 @@
                 "age": {
                     "description": "年龄",
                     "type": "integer"
+                }
+            }
+        },
+        "dto.UserLoginInputDto": {
+            "type": "object",
+            "properties": {
+                "name": {
+                    "type": "string"
+                },
+                "passWord": {
+                    "type": "string"
                 }
             }
         }

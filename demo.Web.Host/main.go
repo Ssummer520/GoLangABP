@@ -1,8 +1,8 @@
 package main
 
 import (
-	repository "GoLangABP/demo.Application/repository"
 	service "GoLangABP/demo.Application/start"
+	userService "GoLangABP/demo.Application/user"
 	. "GoLangABP/demo.Web.Host/conf"
 	. "GoLangABP/demo.Web.Host/controllers"
 	_ "GoLangABP/demo.Web.Host/docs" // 千万不要忘了导入把你上一步生成的docs
@@ -25,7 +25,7 @@ import (
 // @contact.email   support@swagger.io
 // @license.name    Apache 2.0
 // @license.url     http://www.apache.org/licenses/LICENSE-2.0.html
-// @host            localhost:8889
+// @host            localhost:8181
 // @BasePath
 /*  @host 124.220.12.138:8888*/
 /*  @host localhost:8888*/
@@ -46,13 +46,14 @@ func main() {
 		fmt.Println(gin.Mode())
 		r.Run(":" + envPort)
 	} else {
-		r.Run(":8889")
+		r.Run(":8181")
 	}
 }
 
 func Configure(r *gin.Engine) {
 	//controller declare
 	var index Index
+	var userLogin UserLogin
 
 	//inject declare
 	//db := datasource.Db{}
@@ -63,11 +64,14 @@ func Configure(r *gin.Engine) {
 	var injector inject.Graph
 	err := injector.Provide(
 		&inject.Object{Value: &index},
+		&inject.Object{Value: &userLogin},
+		//&inject.Object{Value: &repository.StartRepo{}},
+		&inject.Object{Value: &service.StartService{}},
+		&inject.Object{Value: &userService.UserService{}},
 		//&inject.Object{Value: &db},
 		//&inject.Object{Value: &redis},
 		//&inject.Object{Value: &rabbit},
-		&inject.Object{Value: &repository.StartRepo{}},
-		&inject.Object{Value: &service.StartService{}},
+
 	)
 	if err != nil {
 		log.Fatal("inject fatal: ", err)
@@ -98,6 +102,7 @@ func Configure(r *gin.Engine) {
 	r.GET("/rate", GetRateHandler)
 	r.GET("/buffer", GetBufferHandler)
 	r.GET("/name", index.GetNameHandler)
-	r.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
+	r.POST("/login", userLogin.LoginHandler)
 
+	r.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
 }

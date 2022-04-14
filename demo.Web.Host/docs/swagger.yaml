@@ -5,7 +5,14 @@ definitions:
         description: 年龄
         type: integer
     type: object
-host: localhost:8889
+  dto.UserLoginInputDto:
+    properties:
+      name:
+        type: string
+      passWord:
+        type: string
+    type: object
+host: localhost:8181
 info:
   contact:
     email: support@swagger.io
@@ -64,6 +71,22 @@ paths:
       summary: 获取最新carid
       tags:
       - CarInventoryController 库存相关
+  /login:
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: 请求参数
+        in: body
+        name: object
+        schema:
+          $ref: '#/definitions/dto.UserLoginInputDto'
+      produces:
+      - application/json
+      responses: {}
+      summary: 用户登录
+      tags:
+      - UserLogin 登录相关
   /name:
     get:
       consumes:
