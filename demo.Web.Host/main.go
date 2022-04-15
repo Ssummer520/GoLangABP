@@ -117,11 +117,6 @@ func Configure(r *gin.Engine) {
 	// }
 	r.POST("/login", userLogin.LoginHandler)
 	r.Use(Authentication.JwtVerify)
-	r.GET("/age", GetAgeHandler)
-	r.GET("/car", GetCarHandler)
-	r.POST("/age", AddAgeHandler)
-	r.GET("/rate", GetRateHandler)
-	r.GET("/buffer", GetBufferHandler)
 	r.GET("/name", index.GetNameHandler)
 	r.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
 }
