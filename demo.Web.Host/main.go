@@ -3,11 +3,14 @@ package main
 import (
 	service "GoLangABP/demo.Application/start"
 	userService "GoLangABP/demo.Application/user"
+	. "GoLangABP/demo.Application/user/dto"
+	. "GoLangABP/demo.Core/Model"
 	"GoLangABP/demo.Web.Host/Authentication"
 	. "GoLangABP/demo.Web.Host/conf"
 	. "GoLangABP/demo.Web.Host/controllers"
 	_ "GoLangABP/demo.Web.Host/docs" // 千万不要忘了导入把你上一步生成的docs
 	"fmt"
+	"github.com/devfeel/mapper"
 	"github.com/facebookgo/inject"
 	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
@@ -30,6 +33,9 @@ import (
 // @BasePath
 /*  @host 124.220.12.138:8888*/
 /*  @host localhost:8888*/
+func init() {
+	mapper.Register(&UserInfo{})
+}
 func main() {
 	/*  @host 124.220.12.138:8888*/
 	envPort := ""
@@ -37,7 +43,17 @@ func main() {
 	if gin.Mode() == gin.ReleaseMode {
 		envPort = os.Getenv("ASPNETCORE_PORT")
 	}
-
+	var userInfo = &UserInfo{}
+	userInfo.Phone = "1362246612"
+	userInfo.Age = 1
+	userInfo.Sex = 1
+	userInfo.Name = "aa"
+	var outPut = &UserLoginOutPutDto{}
+	err := mapper.Mapper(userInfo, outPut)
+	if err != nil {
+		return
+	}
+	fmt.Println(outPut)
 	CarInventoryModel.X = 2
 	r := gin.New()
 	Configure(r)
@@ -96,6 +112,7 @@ func Configure(r *gin.Engine) {
 	// if err != nil {
 	// 	log.Fatal("RabbitMQ fatal:", err)
 	// }
+	r.POST("/login", userLogin.LoginHandler)
 	r.Use(Authentication.JwtVerify)
 	r.GET("/age", GetAgeHandler)
 	r.GET("/car", GetCarHandler)
@@ -103,7 +120,5 @@ func Configure(r *gin.Engine) {
 	r.GET("/rate", GetRateHandler)
 	r.GET("/buffer", GetBufferHandler)
 	r.GET("/name", index.GetNameHandler)
-	r.POST("/login", userLogin.LoginHandler)
-
 	r.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
 }
