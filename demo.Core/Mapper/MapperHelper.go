@@ -1,6 +1,7 @@
-package Model
+package MapperHelper
 
 import . "GoLangABP/demo.Core/Model"
+
 import "github.com/devfeel/mapper"
 
 func init() {
@@ -8,6 +9,10 @@ func init() {
 	if err != nil {
 		return
 	}
+}
+func Mapper(fromObj any, toObj any) error {
+	err := mapper.Mapper(fromObj, toObj)
+	return err
 }
 
 //var userInfo = &UserInfo{}

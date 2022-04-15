@@ -1,12 +1,9 @@
 package main
 
 import (
-	. "GoLangABP/demo.Application/user/dto"
-	. "GoLangABP/demo.Core/Model"
 	"GoLangABP/demo.Web.Host/Startup"
 	_ "GoLangABP/demo.Web.Host/docs" // 千万不要忘了导入把你上一步生成的docs
 	"fmt"
-	"github.com/devfeel/mapper"
 	"github.com/gin-gonic/gin"
 	"os"
 )
@@ -24,12 +21,7 @@ import (
 // @BasePath
 /*  @host 124.220.12.138:8888*/
 /*  @host localhost:8888*/
-func init() {
-	err := mapper.Register(&UserInfo{})
-	if err != nil {
-		return
-	}
-}
+
 func main() {
 	/*  @host 124.220.12.138:8888*/
 	envPort := ""
@@ -37,16 +29,16 @@ func main() {
 	if gin.Mode() == gin.ReleaseMode {
 		envPort = os.Getenv("ASPNETCORE_PORT")
 	}
-	var userInfo = &UserInfo{}
-	userInfo.Phone = "1362246612"
-	userInfo.Age = 1
-	userInfo.Sex = 1
-	userInfo.Name = "aa"
-	var outPut = &UserLoginOutPutDto{}
-	err := mapper.Mapper(userInfo, outPut)
-	if err != nil {
-		return
-	}
+	//var userInfo = &UserInfo{}
+	//userInfo.Phone = "1362246612"
+	//userInfo.Age = 1
+	//userInfo.Sex = 1
+	//userInfo.Name = "aa"
+	//var outPut = &UserLoginOutPutDto{}
+	//err := mapper.Mapper(userInfo, outPut)
+	//if err != nil {
+	//	return
+	//}
 	r := gin.New()
 	Startup.Configure(r)
 	if gin.Mode() == gin.ReleaseMode {
