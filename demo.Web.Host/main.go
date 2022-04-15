@@ -34,7 +34,10 @@ import (
 /*  @host 124.220.12.138:8888*/
 /*  @host localhost:8888*/
 func init() {
-	mapper.Register(&UserInfo{})
+	err := mapper.Register(&UserInfo{})
+	if err != nil {
+		return
+	}
 }
 func main() {
 	/*  @host 124.220.12.138:8888*/
@@ -61,9 +64,9 @@ func main() {
 	r.Use(gin.Recovery())
 	if gin.Mode() == gin.ReleaseMode {
 		fmt.Println(gin.Mode())
-		r.Run(":" + envPort)
+		_ = r.Run(":" + envPort)
 	} else {
-		r.Run(":8181")
+		_ = r.Run(":8181")
 	}
 }
 
