@@ -19,6 +19,7 @@ type Index struct {
 // @Router   /name [get]
 func (i *Index) GetNameHandler(c *gin.Context) {
 
+	fmt.Println(11111)
 	str := i.Service.Say("11111")
 	fmt.Println(str)
 	c.JSON(200, gin.H{
