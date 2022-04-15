@@ -1,10 +1,4 @@
 definitions:
-  Model.AgeModel:
-    properties:
-      age:
-        description: 年龄
-        type: integer
-    type: object
   dto.UserLoginInputDto:
     properties:
       name:
@@ -26,51 +20,6 @@ info:
   title: ExamCodeAboutTeslaByGin
   version: "1.0"
 paths:
-  /age:
-    get:
-      consumes:
-      - application/json
-      produces:
-      - application/json
-      responses: {}
-      summary: 获取最新age
-      tags:
-      - AgeController 年龄相关
-    post:
-      consumes:
-      - application/json
-      parameters:
-      - description: 请求参数
-        in: body
-        name: object
-        schema:
-          $ref: '#/definitions/Model.AgeModel'
-      produces:
-      - application/json
-      responses: {}
-      summary: 设置最新age
-      tags:
-      - AgeController 年龄相关
-  /buffer:
-    get:
-      consumes:
-      - application/json
-      produces:
-      - application/json
-      responses: {}
-      summary: 获取最新库存数量
-      tags:
-      - CarInventoryController 库存相关
-  /car:
-    get:
-      consumes:
-      - application/json
-      produces:
-      - application/json
-      responses: {}
-      summary: 获取最新carid
-      tags:
-      - CarInventoryController 库存相关
   /login:
     post:
       consumes:
@@ -97,14 +46,4 @@ paths:
       summary: 获取最新age
       tags:
       - Index 依赖注入相关
-  /rate:
-    get:
-      consumes:
-      - application/json
-      produces:
-      - application/json
-      responses: {}
-      summary: 获取最新售卖率
-      tags:
-      - CarInventoryController 库存相关
 swagger: "2.0"

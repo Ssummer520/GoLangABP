@@ -6,11 +6,11 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
+//路由
+var IndexC Index
+var UserC UserLogin
 func ConfigureRoute(r *gin.Engine) {
 	//controller declare
-	var index Index
-	var userLogin UserLogin
-	r.POST("/login", userLogin.LoginHandler)
-	r.GET("/name", index.GetNameHandler)
+
 	r.Use(Authentication.JwtVerify)
 }

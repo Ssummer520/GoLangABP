@@ -3,6 +3,7 @@ package Startup
 import (
 	service "GoLangABP/demo.Application/start"
 	userService "GoLangABP/demo.Application/user"
+	"GoLangABP/demo.Web.Host/Authentication"
 	. "GoLangABP/demo.Web.Host/controllers"
 	_ "GoLangABP/demo.Web.Host/docs" // 千万不要忘了导入把你上一步生成的docs
 	"github.com/facebookgo/inject"
@@ -13,19 +14,18 @@ import (
 	"log"
 )
 
-func Configure(r *gin.Engine, envPort string) {
+func Configure(r *gin.Engine) {
 
-	r.Use(cors.Default())
-	r.Use(gin.Recovery())
 	//controller declare
 	var index Index
 	var userLogin UserLogin
+
 	//inject declare
 	//db := datasource.Db{}
 	//redis := cache.Redis{}
 	//rabbit := rabbitmq.Mq{}
-	//Injection
 
+	//Injection
 	var injector inject.Graph
 	err := injector.Provide(
 		&inject.Object{Value: &index},
@@ -60,7 +60,12 @@ func Configure(r *gin.Engine, envPort string) {
 	// if err != nil {
 	// 	log.Fatal("RabbitMQ fatal:", err)
 	// }
-	ConfigureRoute(r)
+	r.POST("/login", userLogin.LoginHandler)
+	r.Use(Authentication.JwtVerify)
+
+	r.GET("/name", index.GetNameHandler)
 	r.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
-	_ = r.Run(":" + envPort)
+	r.Use(cors.Default())
+	r.Use(gin.Recovery())
+	return
 }

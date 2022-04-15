@@ -25,74 +25,6 @@ const docTemplate = `{
     "host": "{{.Host}}",
     "basePath": "{{.BasePath}}",
     "paths": {
-        "/age": {
-            "get": {
-                "consumes": [
-                    "application/json"
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "tags": [
-                    "AgeController 年龄相关"
-                ],
-                "summary": "获取最新age",
-                "responses": {}
-            },
-            "post": {
-                "consumes": [
-                    "application/json"
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "tags": [
-                    "AgeController 年龄相关"
-                ],
-                "summary": "设置最新age",
-                "parameters": [
-                    {
-                        "description": "请求参数",
-                        "name": "object",
-                        "in": "body",
-                        "schema": {
-                            "$ref": "#/definitions/Model.AgeModel"
-                        }
-                    }
-                ],
-                "responses": {}
-            }
-        },
-        "/buffer": {
-            "get": {
-                "consumes": [
-                    "application/json"
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "tags": [
-                    "CarInventoryController 库存相关"
-                ],
-                "summary": "获取最新库存数量",
-                "responses": {}
-            }
-        },
-        "/car": {
-            "get": {
-                "consumes": [
-                    "application/json"
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "tags": [
-                    "CarInventoryController 库存相关"
-                ],
-                "summary": "获取最新carid",
-                "responses": {}
-            }
-        },
         "/login": {
             "post": {
                 "consumes": [
@@ -132,33 +64,9 @@ const docTemplate = `{
                 "summary": "获取最新age",
                 "responses": {}
             }
-        },
-        "/rate": {
-            "get": {
-                "consumes": [
-                    "application/json"
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "tags": [
-                    "CarInventoryController 库存相关"
-                ],
-                "summary": "获取最新售卖率",
-                "responses": {}
-            }
         }
     },
     "definitions": {
-        "Model.AgeModel": {
-            "type": "object",
-            "properties": {
-                "age": {
-                    "description": "年龄",
-                    "type": "integer"
-                }
-            }
-        },
         "dto.UserLoginInputDto": {
             "type": "object",
             "properties": {
