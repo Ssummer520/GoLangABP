@@ -62,5 +62,5 @@ func Configure(r *gin.Engine, envPort string) {
 	// }
 	ConfigureRoute(r)
 	r.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
-	r.Run(":" + envPort)
+	_ = r.Run(":" + envPort)
 }
