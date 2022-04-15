@@ -3,6 +3,7 @@ package main
 import (
 	service "GoLangABP/demo.Application/start"
 	userService "GoLangABP/demo.Application/user"
+	"GoLangABP/demo.Web.Host/Authentication"
 	. "GoLangABP/demo.Web.Host/conf"
 	. "GoLangABP/demo.Web.Host/controllers"
 	_ "GoLangABP/demo.Web.Host/docs" // 千万不要忘了导入把你上一步生成的docs
@@ -95,7 +96,7 @@ func Configure(r *gin.Engine) {
 	// if err != nil {
 	// 	log.Fatal("RabbitMQ fatal:", err)
 	// }
-
+	r.Use(Authentication.JwtVerify)
 	r.GET("/age", GetAgeHandler)
 	r.GET("/car", GetCarHandler)
 	r.POST("/age", AddAgeHandler)
