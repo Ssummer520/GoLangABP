@@ -3,7 +3,6 @@ module GoLangABP
 go 1.18
 
 require (
-	github.com/bingjian-zhu/gin-inject v0.0.0-20191106070148-5d738b8dd2bc
 	github.com/devfeel/mapper v0.7.5
 	github.com/dgrijalva/jwt-go v3.2.0+incompatible
 	github.com/facebookgo/inject v0.0.0-20180706035515-f23751cae28b
@@ -49,12 +48,8 @@ require (
 )
 
 require (
-	github.com/denisenkom/go-mssqldb v0.12.0 // indirect
-	github.com/golang-sql/civil v0.0.0-20220223132316-b832511892a9 // indirect
-	github.com/jinzhu/gorm v1.9.11 // indirect
+	github.com/facebookgo/stack v0.0.0-20160209184415-751773369052 // indirect
 	github.com/jinzhu/inflection v1.0.0 // indirect
 	github.com/jinzhu/now v1.1.4 // indirect
-	github.com/lib/pq v1.10.2 // indirect
-	github.com/mattn/go-sqlite3 v1.14.12 // indirect
 	gopkg.in/yaml.v3 v3.0.0-20210107192922-496545a6307b // indirect
 )

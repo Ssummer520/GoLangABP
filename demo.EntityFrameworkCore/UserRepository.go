@@ -2,8 +2,8 @@ package repository
 
 import (
 	. "GoLangABP/demo.Core/Model"
+	"GoLangABP/demo.EntityFrameworkCore/datasource"
 	"fmt"
-	"github.com/bingjian-zhu/gin-inject/common/datasource"
 )
 
 // UserRepository  注入数据库
