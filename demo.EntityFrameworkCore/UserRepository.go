@@ -15,7 +15,7 @@ type UserRepository struct {
 func (t *UserRepository) FirstOrDefault() *UserInfo {
 	var user = &UserInfo{}
 	fmt.Println(22222222)
-	t.Source.DB().First(user)
+	t.Source.DB().Raw("select * from userinfo limit 1").Scan(user)
 	fmt.Println(user)
 	return user
 }

@@ -32,12 +32,12 @@ func Configure(r *gin.Engine) {
 	err := injector.Provide(
 		&inject.Object{Value: &index},
 		&inject.Object{Value: &userLogin},
+		&inject.Object{Value: &db},
 		//&inject.Object{Value: &repository.StartRepo{}},
 		&inject.Object{Value: &service.StartService{}},
 		&inject.Object{Value: &rep.UserRepository{}},
 		&inject.Object{Value: &userService.UserService{}},
 
-		&inject.Object{Value: &db},
 		//&inject.Object{Value: &redis},
 		//&inject.Object{Value: &rabbit},
 
@@ -50,10 +50,11 @@ func Configure(r *gin.Engine) {
 	}
 
 	//database connect
-	//err = db.Connect()
-	//if err != nil {
-	//	log.Fatal("db fatal:", err)
-	//}
+	err = db.Connect()
+	if err != nil {
+		log.Fatal("db fatal:", err)
+	}
+
 	// //redis server connect
 	// err = redis.Connect()
 	// if err != nil {
