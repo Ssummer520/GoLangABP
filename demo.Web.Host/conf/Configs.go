@@ -50,12 +50,13 @@ type RabbitMQ struct {
 
 func init() {
 	Configs = getConf()
-	log.Println("[Setting] Config init success")
+	log.Println("[111] Config init success")
 }
 
 func getConf() *Conf {
 	var c *Conf
-	file, err := ioutil.ReadFile("Config.yml")
+	file, err := ioutil.ReadFile("demo.Web.Host/conf/Config.yml")
+
 	if err != nil {
 		log.Println("[] config error: ", err)
 	}

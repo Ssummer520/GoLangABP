@@ -15,7 +15,7 @@ type UserService struct {
 
 //Login 实现Login方法
 func (u *UserService) Login(input dto.UserLoginInputDto) bool {
-	fmt.Println(111111111)
+
 	var userInfo = &UserInfo{}
 	userInfo.Phone = "1362246612"
 	userInfo.Age = 1
@@ -26,6 +26,7 @@ func (u *UserService) Login(input dto.UserLoginInputDto) bool {
 	if err != nil {
 		fmt.Println(err)
 	}
+	fmt.Println(u)
 	data := u.Source.FirstOrDefault()
 	fmt.Println(data)
 	if input.PassWord == "" || input.Name == "" {

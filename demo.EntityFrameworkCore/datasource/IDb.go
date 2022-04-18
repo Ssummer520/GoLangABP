@@ -1,6 +1,6 @@
 package datasource
 
-import "github.com/jinzhu/gorm"
+import "gorm.io/gorm"
 
 type IDb interface {
 	DB() *gorm.DB
