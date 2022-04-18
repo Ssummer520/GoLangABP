@@ -1,8 +1,8 @@
 package datasource
 
 import (
+	conf2 "GoLangABP/demo.Web.Host/conf"
 	"fmt"
-	"github.com/bingjian-zhu/gin-inject/common/setting"
 	_ "github.com/go-sql-driver/mysql"
 	"github.com/jinzhu/gorm"
 	"log"
@@ -17,7 +17,7 @@ func (d *Db) Connect() error {
 		dbType, dbName, user, pwd, host string
 	)
 
-	conf := setting.Config.Database
+	conf := conf2.Configs.Database
 	dbType = conf.Type
 	dbName = conf.Name
 	user = conf.User

@@ -1,15 +1,14 @@
 package conf
 
 import (
+	"gopkg.in/yaml.v2"
 	"io/ioutil"
 	"log"
 	"time"
-
-	"gopkg.in/yaml.v2"
 )
 
 var (
-	Config *Conf
+	Configs *Conf
 )
 
 type Conf struct {
@@ -50,19 +49,19 @@ type RabbitMQ struct {
 }
 
 func init() {
-	Config = getConf()
+	Configs = getConf()
 	log.Println("[Setting] Config init success")
 }
 
 func getConf() *Conf {
 	var c *Conf
-	file, err := ioutil.ReadFile("Config/config.yml")
+	file, err := ioutil.ReadFile("Config.yml")
 	if err != nil {
-		log.Println("[Setting] config error: ", err)
+		log.Println("[] config error: ", err)
 	}
 	err = yaml.UnmarshalStrict(file, &c)
 	if err != nil {
-		log.Println("[Setting] yaml unmarshal error: ", err)
+		log.Println("[] yaml unmarshal error: ", err)
 	}
 	return c
 }

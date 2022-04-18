@@ -10,12 +10,12 @@ import MapperHelper "GoLangABP/demo.Core/Mapper"
 
 //UserService 注入UserService
 type UserService struct {
-	IRepository rep.IRepository[UserInfo] `inject:""`
+	Source rep.IUserRepository `inject:""`
 }
 
 //Login 实现Login方法
 func (u *UserService) Login(input dto.UserLoginInputDto) bool {
-	fmt.Println(input)
+	fmt.Println(111111111)
 	var userInfo = &UserInfo{}
 	userInfo.Phone = "1362246612"
 	userInfo.Age = 1
@@ -26,13 +26,16 @@ func (u *UserService) Login(input dto.UserLoginInputDto) bool {
 	if err != nil {
 		fmt.Println(err)
 	}
+	data := u.Source.FirstOrDefault()
+	fmt.Println(data)
 	if input.PassWord == "" || input.Name == "" {
 		return false
 	}
 	return true
 }
+
 func (u *UserService) First(input dto.UserLoginInputDto) dto.UserLoginOutPutDto {
-	data := u.IRepository.FirstOrDefault()
+	data := u.Source.FirstOrDefault()
 	var ret = &dto.UserLoginOutPutDto{}
 	MapperHelper.Mapper(data, ret)
 	return *ret

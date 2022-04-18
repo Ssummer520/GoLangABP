@@ -6,9 +6,9 @@ server:
 database:
   type: mysql
   user: root
-  password: Zbj123
-  host: 127.0.0.1:3306
-  name: gin-vue
+  password: sa@123
+  host: localhost:3306
+  name: demo
   table-prefix: go_
 
 redis:
