@@ -1,8 +1,8 @@
 package datasource
 
-import "gorm.io/gorm"
+import "github.com/jmoiron/sqlx"
 
 type IDb interface {
-	DB() *gorm.DB
+	DB() *sqlx.DB
 	Connect() error
 }

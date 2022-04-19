@@ -3,21 +3,16 @@ package datasource
 import (
 	. "GoLangABP/demo.Web.Host/conf"
 	"fmt"
-	"gorm.io/driver/mysql"
-	"gorm.io/gorm"
-
+	_ "github.com/go-sql-driver/mysql"
+	"github.com/jmoiron/sqlx"
 	"log"
 )
 
 type Db struct {
-	Conn *gorm.DB
+	Conn *sqlx.DB
 }
 
 func (d *Db) Connect() error {
-	//var (
-	//	dbType, dbName, user, pwd, host string
-	//)
-
 	conf := Configs.Database
 	//dbType = conf.Type
 	//dbName = conf.Name
@@ -27,7 +22,7 @@ func (d *Db) Connect() error {
 	fmt.Println(112211111111111111)
 	dsn := conf.User + ":" + conf.Password + "@tcp(127.0.0.1:3306)/demo?charset=utf8mb4&parseTime=True&loc=Local"
 	fmt.Println(dsn)
-	db, err := gorm.Open(mysql.Open(dsn), &gorm.Config{})
+	db, err := sqlx.Connect("mysql", dsn)
 
 	if err != nil {
 		fmt.Println(err)
@@ -40,6 +35,6 @@ func (d *Db) Connect() error {
 	return nil
 }
 
-func (d *Db) DB() *gorm.DB {
+func (d *Db) DB() *sqlx.DB {
 	return d.Conn
 }
