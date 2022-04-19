@@ -3,12 +3,14 @@ package controllers
 import (
 	userService "GoLangABP/demo.Application/user"
 	. "GoLangABP/demo.Application/user/dto"
+	. "GoLangABP/demo.Web.Host/Authentication"
 	jwt "GoLangABP/demo.Web.Host/Authentication"
 	"github.com/gin-gonic/gin"
 )
 
 type UserLogin struct {
-	User userService.IUserService `inject:""`
+	User   userService.IUserService `inject:""`
+	Source IJWTHelper               `inject:""`
 }
 
 // LoginHandler
@@ -26,7 +28,7 @@ func (u *UserLogin) LoginHandler(c *gin.Context) {
 	claims.ID = "17343016071"
 	claims.Phone = "17343016071"
 	claims.Name = "17343016071"
-	token := jwt.GenerateToken(claims)
+	token := u.Source.GenerateToken(claims)
 	c.JSON(200, gin.H{
 		"Success": success,
 		"Token":   token,

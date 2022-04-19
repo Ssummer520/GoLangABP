@@ -5,6 +5,7 @@ import (
 	userService "GoLangABP/demo.Application/user"
 	rep "GoLangABP/demo.EntityFrameworkCore"
 	"GoLangABP/demo.EntityFrameworkCore/datasource"
+	. "GoLangABP/demo.Web.Host/Authentication"
 	. "GoLangABP/demo.Web.Host/controllers"
 	_ "GoLangABP/demo.Web.Host/docs" // 千万不要忘了导入把你上一步生成的docs
 	"github.com/facebookgo/inject"
@@ -37,6 +38,7 @@ func Configure(r *gin.Engine) {
 		&inject.Object{Value: &service.StartService{}},
 		&inject.Object{Value: &rep.UserRepository{}},
 		&inject.Object{Value: &userService.UserService{}},
+		&inject.Object{Value: &JWTHelper{}},
 
 		//&inject.Object{Value: &redis},
 		//&inject.Object{Value: &rabbit},

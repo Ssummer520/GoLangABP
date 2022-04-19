@@ -15,6 +15,9 @@ type UserClaims struct {
 	//jwt-go提供的标准claim
 	jwt.StandardClaims
 }
+type JWTHelper struct {
+	Source IJWTHelper `inject:""`
+}
 
 var errObject interface{}
 var (
@@ -27,7 +30,7 @@ var (
 )
 
 // GenerateToken 生成token
-func GenerateToken(claims *UserClaims) string {
+func (j *JWTHelper) GenerateToken(claims *UserClaims) string {
 	//设置token有效期，也可不设置有效期，采用redis的方式
 	//   1)将token存储在redis中，设置过期时间，token如没过期，则自动刷新redis过期时间，
 	//   2)通过这种方式，可以很方便的为token续期，而且也可以实现长时间不登录的话，强制登录
@@ -45,7 +48,7 @@ func GenerateToken(claims *UserClaims) string {
 }
 
 // JwtVerify 验证token
-func JwtVerify(c *gin.Context) {
+func (j *JWTHelper) JwtVerify(c *gin.Context) {
 	return
 	//过滤是否验证token
 	//if utils.IsContainArr(noVerify, c.Request.RequestURI) {
@@ -57,11 +60,11 @@ func JwtVerify(c *gin.Context) {
 		panic(errObject)
 	}
 	//验证token，并存储在请求中
-	c.Set("user", parseToken(token))
+	c.Set("user", j.Source.parseToken(token))
 }
 
 // 解析Token
-func parseToken(tokenString string) *UserClaims {
+func (j *JWTHelper) parseToken(tokenString string) *UserClaims {
 	//解析token
 	token, err := jwt.ParseWithClaims(tokenString, &UserClaims{}, func(token *jwt.Token) (interface{}, error) {
 		return secret, nil
@@ -80,7 +83,7 @@ func parseToken(tokenString string) *UserClaims {
 }
 
 // Refresh 更新token
-func Refresh(tokenString string) string {
+func (j *JWTHelper) Refresh(tokenString string) string {
 	jwt.TimeFunc = func() time.Time {
 		return time.Unix(0, 0)
 	}
@@ -98,5 +101,5 @@ func Refresh(tokenString string) string {
 	}
 	jwt.TimeFunc = time.Now
 	claims.StandardClaims.ExpiresAt = time.Now().Add(2 * time.Hour).Unix()
-	return GenerateToken(claims)
+	return j.Source.GenerateToken(claims)
 }
