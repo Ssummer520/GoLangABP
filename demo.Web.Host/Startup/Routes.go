@@ -13,8 +13,8 @@ var jwt = &Authentication.JWTHelper{}
 
 func ConfigureRoute(r *gin.Engine) {
 	//controller declare
-	r.Use(jwt.JwtVerify)
-	r.POST("/login", userLoginR.LoginHandler)
 
+	r.POST("/login", userLoginR.LoginHandler)
+	r.Use(jwt.JwtVerify)
 	r.GET("/name", indexR.GetNameHandler)
 }

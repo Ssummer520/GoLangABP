@@ -2,6 +2,7 @@ package controllers
 
 import (
 	service "GoLangABP/demo.Application/start"
+	. "GoLangABP/demo.Web.Host/Authentication"
 	"fmt"
 	"github.com/gin-gonic/gin"
 )
@@ -9,6 +10,7 @@ import (
 //Index 注入IStartService
 type Index struct {
 	Service service.IStartService `inject:""`
+	Source  IJWTHelper            `inject:""`
 }
 
 // GetNameHandler
@@ -17,9 +19,11 @@ type Index struct {
 // @Accept   application/json
 // @Produce  application/json
 // @Router   /name [get]
+// @Security ApiKeyAuth
+// @Param Authorization header string false "Bearer 用户令牌"
 func (i *Index) GetNameHandler(c *gin.Context) {
-
 	fmt.Println(11111)
+	i.Source.JwtVerify(c)
 	str := i.Service.Say("11111")
 	fmt.Println(str)
 	c.JSON(200, gin.H{

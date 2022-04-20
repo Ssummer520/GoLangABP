@@ -19,7 +19,7 @@ func (d *Db) Connect() error {
 	//user = conf.User
 	//pwd = conf.Password
 	//host = conf.Host
-	fmt.Println(112211111111111111)
+
 	dsn := conf.User + ":" + conf.Password + "@tcp(127.0.0.1:3306)/demo?charset=utf8mb4&parseTime=True&loc=Local"
 	fmt.Println(dsn)
 	db, err := sqlx.Connect("mysql", dsn)

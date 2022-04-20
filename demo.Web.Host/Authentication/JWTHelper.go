@@ -1,6 +1,7 @@
 package Authentication
 
 import (
+	"fmt"
 	//"awesomeProject/utils"
 	"github.com/dgrijalva/jwt-go"
 	"github.com/gin-gonic/gin"
@@ -20,6 +21,7 @@ type JWTHelper struct {
 }
 
 var errObject interface{}
+
 var (
 	//自定义的token秘钥
 	secret = []byte("16849841325189456f487")
@@ -49,23 +51,31 @@ func (j *JWTHelper) GenerateToken(claims *UserClaims) string {
 
 // JwtVerify 验证token
 func (j *JWTHelper) JwtVerify(c *gin.Context) {
-	return
+	hash := make(map[string]bool)
+	hash["/swagger/index.html"] = true
+	hash["/swagger/favicon-32x32.png"] = true
+	hash["/swagger/doc.json"] = true
+	hash["/swagger/swagger-ui-standalone-preset.js"] = true
+	hash["/swagger/swagger-ui.css"] = true
+	hash["/swagger/swagger-ui-bundle.js"] = true
 	//过滤是否验证token
-	//if utils.IsContainArr(noVerify, c.Request.RequestURI) {
-	//	return
-	//}
-	token := c.GetHeader("token")
+
+	if hash[c.Request.RequestURI] {
+		return
+	}
+	token := c.GetHeader("Authorization")
 	if token == "" {
 		errObject = "token not exist !"
 		panic(errObject)
 	}
 	//验证token，并存储在请求中
-	c.Set("user", j.Source.parseToken(token))
+	c.Set("user", j.parseToken(token))
 }
 
 // 解析Token
 func (j *JWTHelper) parseToken(tokenString string) *UserClaims {
 	//解析token
+
 	token, err := jwt.ParseWithClaims(tokenString, &UserClaims{}, func(token *jwt.Token) (interface{}, error) {
 		return secret, nil
 	})
@@ -79,6 +89,7 @@ func (j *JWTHelper) parseToken(tokenString string) *UserClaims {
 		errObject = "token is valid"
 		panic(errObject)
 	}
+	fmt.Println(111)
 	return claims
 }
 
