@@ -32,7 +32,15 @@ paths:
           $ref: '#/definitions/dto.UserLoginInputDto'
       produces:
       - application/json
-      responses: {}
+      responses:
+        "200":
+          description: '{"Success": true,"Token":"5545"}'
+          schema:
+            type: string
+        "400":
+          description: '{"msg": "who are you"}'
+          schema:
+            type: string
       summary: 用户登录
       tags:
       - UserLogin 登录相关
@@ -47,9 +55,15 @@ paths:
         type: string
       produces:
       - application/json
-      responses: {}
-      security:
-      - ApiKeyAuth: []
+      responses:
+        "200":
+          description: '{"car":"211221321"}'
+          schema:
+            type: string
+        "400":
+          description: '{"msg": "who are you"}'
+          schema:
+            type: string
       summary: 获取最新age
       tags:
       - Index 依赖注入相关

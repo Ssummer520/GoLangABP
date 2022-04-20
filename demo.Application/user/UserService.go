@@ -2,7 +2,7 @@ package userService
 
 import (
 	"GoLangABP/demo.Application/user/dto"
-	. "GoLangABP/demo.Core/Model"
+	_ "GoLangABP/demo.Core/Model"
 	rep "GoLangABP/demo.EntityFrameworkCore"
 	"fmt"
 )
@@ -16,20 +16,17 @@ type UserService struct {
 //Login 实现Login方法
 func (u *UserService) Login(input dto.UserLoginInputDto) bool {
 
-	var userInfo = &UserInfo{}
-	userInfo.Phone = "1362246612"
-	userInfo.Age = 1
-	userInfo.Sex = 1
-	userInfo.Name = "aa"
 	var outPut = &dto.UserLoginOutPutDto{}
-	err := MapperHelper.Mapper(userInfo, outPut)
+
+	fmt.Println(input.PassWord, input.Name)
+	userModel := u.Source.FirstOrDefault()
+
+	err := MapperHelper.Mapper(userModel, outPut)
 	if err != nil {
 		fmt.Println(err)
 	}
-	fmt.Println(u)
-	data := u.Source.FirstOrDefault()
-	fmt.Println(data)
-	if input.PassWord == "" || input.Name == "" {
+	fmt.Println(input.Name, outPut.Name, input.PassWord, outPut.PassWord)
+	if input.PassWord != outPut.PassWord || input.Name != outPut.Name {
 		return false
 	}
 	return true

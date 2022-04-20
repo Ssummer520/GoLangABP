@@ -47,16 +47,24 @@ const docTemplate = `{
                         }
                     }
                 ],
-                "responses": {}
+                "responses": {
+                    "200": {
+                        "description": "{\"Success\": true,\"Token\":\"5545\"}",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "400": {
+                        "description": "{\"msg\": \"who are you\"}",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
             }
         },
         "/name": {
             "get": {
-                "security": [
-                    {
-                        "ApiKeyAuth": []
-                    }
-                ],
                 "consumes": [
                     "application/json"
                 ],
@@ -75,7 +83,20 @@ const docTemplate = `{
                         "in": "header"
                     }
                 ],
-                "responses": {}
+                "responses": {
+                    "200": {
+                        "description": "{\"car\":\"211221321\"}",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "400": {
+                        "description": "{\"msg\": \"who are you\"}",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
             }
         }
     },

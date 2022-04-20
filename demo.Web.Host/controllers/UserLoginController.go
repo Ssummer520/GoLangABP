@@ -20,15 +20,21 @@ type UserLogin struct {
 // @Produce  application/json
 // @Param object body UserLoginInputDto false "请求参数"
 // @Router   /login [post]
+// @Success 200 {string} string "{"Success": true,"Token":"5545"}"
+// @Failure 400 {string} string "{"msg": "who are you"}"
 func (u *UserLogin) LoginHandler(c *gin.Context) {
 	var dto UserLoginInputDto
-	c.ShouldBind(dto)
+	c.ShouldBind(&dto)
 	success := u.User.Login(dto)
-	claims := &jwt.UserClaims{}
-	claims.ID = "17343016071"
-	claims.Phone = "17343016071"
-	claims.Name = "17343016071"
-	token := u.Source.GenerateToken(claims)
+	token := ""
+	if success {
+		claims := &jwt.UserClaims{}
+		claims.ID = "1"
+		claims.Phone = "17343016071"
+		claims.Name = "17343016071"
+		token = u.Source.GenerateToken(claims)
+	}
+
 	c.JSON(200, gin.H{
 		"Success": success,
 		"Token":   token,

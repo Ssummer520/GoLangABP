@@ -19,8 +19,9 @@ type Index struct {
 // @Accept   application/json
 // @Produce  application/json
 // @Router   /name [get]
-// @Security ApiKeyAuth
 // @Param Authorization header string false "Bearer 用户令牌"
+// @Success 200 {string} string "{"car":"211221321"}"
+// @Failure 400 {string} string "{"msg": "who are you"}"
 func (i *Index) GetNameHandler(c *gin.Context) {
 	fmt.Println(11111)
 	i.Source.JwtVerify(c)

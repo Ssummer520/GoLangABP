@@ -14,8 +14,7 @@ type UserRepository struct {
 // FirstOrDefault FirstOrDefault
 func (t *UserRepository) FirstOrDefault() *UserInfo {
 	var user = &UserInfo{}
-	fmt.Println(22222222)
-	err := t.Source.DB().Get(user, "select name,sex,phone,age from userinfo limit 1")
+	err := t.Source.DB().Get(user, "select name,sex,phone,age,password from userinfo limit 1")
 	if err != nil {
 		fmt.Println(err)
 	}
