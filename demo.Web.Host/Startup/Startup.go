@@ -21,8 +21,10 @@ func Configure(r *gin.Engine) {
 	//controller declare
 	var index Index
 	var userLogin UserLogin
+	var user User
 	indexR = &index
 	userLoginR = &userLogin
+	userR = &user
 	//inject declare
 	db := datasource.Db{}
 	//redis := cache.Redis{}
@@ -32,6 +34,7 @@ func Configure(r *gin.Engine) {
 	var injector inject.Graph
 	err := injector.Provide(
 		&inject.Object{Value: &index},
+		&inject.Object{Value: &user},
 		&inject.Object{Value: &userLogin},
 		&inject.Object{Value: &db},
 		//&inject.Object{Value: &repository.StartRepo{}},
@@ -44,6 +47,7 @@ func Configure(r *gin.Engine) {
 		//&inject.Object{Value: &rabbit},
 
 	)
+
 	if err != nil {
 		log.Fatal("inject fatal: ", err)
 	}

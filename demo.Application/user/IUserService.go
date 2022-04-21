@@ -6,4 +6,5 @@ import "GoLangABP/demo.Core/Dto"
 type IUserService interface {
 	//Login 登录
 	Login(input dto.UserLoginInputDto) bool
+	Add(input dto.UserAddInputDto) dto.UserAddOutPutDto
 }

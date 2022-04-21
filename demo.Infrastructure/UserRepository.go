@@ -1,6 +1,7 @@
 package repository
 
 import (
+	dto "GoLangABP/demo.Core/Dto"
 	. "GoLangABP/demo.Core/Model"
 	"GoLangABP/demo.Infrastructure/datasource"
 	"fmt"
@@ -19,4 +20,15 @@ func (t *UserRepository) FirstOrDefault() *UserInfo {
 		fmt.Println(err)
 	}
 	return user
+}
+func (t *UserRepository) Add(input dto.UserAddInputDto) bool {
+	isSuccess := true
+	result, err := t.Source.DB().Exec("INSERT INTO userinfo (`name`, `phone`,  `password`) VALUES (?, ?, ?)",
+		input.Name, input.Phone, input.PassWord)
+	if err != nil {
+		isSuccess = false
+		fmt.Println(err)
+	}
+	result.LastInsertId()
+	return isSuccess
 }

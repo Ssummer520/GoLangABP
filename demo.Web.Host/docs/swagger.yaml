@@ -1,9 +1,27 @@
 definitions:
+  dto.UserAddInputDto:
+    properties:
+      age:
+        description: 年龄
+        type: integer
+      name:
+        description: 姓名
+        type: string
+      password:
+        description: 密码
+        type: string
+      phone:
+        description: 电话
+        type: string
+      sex:
+        description: 性别
+        type: integer
+    type: object
   dto.UserLoginInputDto:
     properties:
       name:
         type: string
-      passWord:
+      password:
         type: string
     type: object
 host: localhost:8181
@@ -67,4 +85,20 @@ paths:
       summary: 获取最新age
       tags:
       - Index 依赖注入相关
+  /user:
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: 请求参数
+        in: body
+        name: object
+        schema:
+          $ref: '#/definitions/dto.UserAddInputDto'
+      produces:
+      - application/json
+      responses: {}
+      summary: 新增用户信息
+      tags:
+      - User 用户相关
 swagger: "2.0"

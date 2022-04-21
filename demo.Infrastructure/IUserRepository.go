@@ -1,8 +1,11 @@
 package repository
 
-import "GoLangABP/demo.Core/Model"
+import (
+	. "GoLangABP/demo.Core/Dto"
+	"GoLangABP/demo.Core/Model"
+)
 
-//IRepository IRepository
 type IUserRepository interface {
 	FirstOrDefault() *Model.UserInfo
+	Add(input UserAddInputDto) *UserAddOutPutDto
 }
