@@ -11,7 +11,7 @@ JWT依赖注入
 项目初始搭建 正在完善具体细节 完善代码
 
 
-Swagger还原的时候需要注意 当前的go版本为1.18需要执行
+Swagger还原的时候需要注意 当前的go版本为1.18需要执行 
 go install  github.com/swaggo/swag/cmd/swag@latest
 
 
