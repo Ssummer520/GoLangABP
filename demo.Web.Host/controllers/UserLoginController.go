@@ -2,7 +2,7 @@ package controllers
 
 import (
 	userService "GoLangABP/demo.Application/user"
-	. "GoLangABP/demo.Application/user/dto"
+	. "GoLangABP/demo.Core/Dto"
 	. "GoLangABP/demo.Web.Host/Authentication"
 	jwt "GoLangABP/demo.Web.Host/Authentication"
 	"github.com/gin-gonic/gin"

@@ -1,7 +1,7 @@
 package userService
 
 import (
-	"GoLangABP/demo.Application/user/dto"
+	dto "GoLangABP/demo.Core/Dto"
 	_ "GoLangABP/demo.Core/Model"
 	rep "GoLangABP/demo.EntityFrameworkCore"
 	"fmt"

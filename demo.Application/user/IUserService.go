@@ -1,6 +1,6 @@
 package userService
 
-import "GoLangABP/demo.Application/user/dto"
+import "GoLangABP/demo.Core/Dto"
 
 //IUserService 定义IUserService接口
 type IUserService interface {
