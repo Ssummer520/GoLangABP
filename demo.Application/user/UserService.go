@@ -3,7 +3,7 @@ package userService
 import (
 	dto "GoLangABP/demo.Core/Dto"
 	_ "GoLangABP/demo.Core/Model"
-	rep "GoLangABP/demo.EntityFrameworkCore"
+	rep "GoLangABP/demo.Infrastructure"
 	"fmt"
 )
 import MapperHelper "GoLangABP/demo.Core/Mapper"

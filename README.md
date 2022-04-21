@@ -15,3 +15,4 @@ Swagger还原的时候需要注意 当前的go版本为1.18需要执行
 go install  github.com/swaggo/swag/cmd/swag@latest
 
 
+![](../../../Desktop/4933701-bb2953451b9b14e7.jpeg)

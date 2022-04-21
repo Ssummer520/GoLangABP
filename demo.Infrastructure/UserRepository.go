@@ -2,7 +2,7 @@ package repository
 
 import (
 	. "GoLangABP/demo.Core/Model"
-	"GoLangABP/demo.EntityFrameworkCore/datasource"
+	"GoLangABP/demo.Infrastructure/datasource"
 	"fmt"
 )
 

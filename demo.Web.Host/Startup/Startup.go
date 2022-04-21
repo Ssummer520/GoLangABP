@@ -3,8 +3,8 @@ package Startup
 import (
 	service "GoLangABP/demo.Application/start"
 	userService "GoLangABP/demo.Application/user"
-	rep "GoLangABP/demo.EntityFrameworkCore"
-	"GoLangABP/demo.EntityFrameworkCore/datasource"
+	rep "GoLangABP/demo.Infrastructure"
+	"GoLangABP/demo.Infrastructure/datasource"
 	. "GoLangABP/demo.Web.Host/Authentication"
 	. "GoLangABP/demo.Web.Host/controllers"
 	_ "GoLangABP/demo.Web.Host/docs" // 千万不要忘了导入把你上一步生成的docs
