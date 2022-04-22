@@ -135,8 +135,8 @@ var SwaggerInfo = &swag.Spec{
 	Host:             "localhost:8181",
 	BasePath:         "",
 	Schemes:          []string{},
-	Title:            "ExamCodeAboutTeslaByGin",
-	Description:      "ExamCodeAboutTeslaByGin",
+	Title:            "GoLangWebFrameWork",
+	Description:      "参考ABP 框架搭建",
 	InfoInstanceName: "swagger",
 	SwaggerTemplate:  docTemplate,
 }

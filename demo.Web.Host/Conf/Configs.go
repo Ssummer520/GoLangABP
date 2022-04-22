@@ -26,7 +26,7 @@ type Server struct {
 
 type Database struct {
 	Type        string `yaml:"type"`
-	User        string `yaml:"User"`
+	User        string `yaml:"user"`
 	Password    string `yaml:"password"`
 	Host        string `yaml:"host"`
 	Name        string `yaml:"name"`
@@ -44,7 +44,7 @@ type Redis struct {
 type RabbitMQ struct {
 	Addr string `yaml:"addr"`
 	Port int    `yaml:"port"`
-	User string `yaml:"User"`
+	User string `yaml:"user"`
 	Pass string `yaml:"pass"`
 }
 

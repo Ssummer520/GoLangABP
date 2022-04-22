@@ -8,9 +8,9 @@ import (
 	"os"
 )
 
-// @title           ExamCodeAboutTeslaByGin
+// @title           GoLangWebFrameWork
 // @version         1.0
-// @description     ExamCodeAboutTeslaByGin
+// @description     参考ABP 框架搭建
 // @termsOfService  http://swagger.io/terms/
 // @contact.name    1362
 // @contact.url     http://www.swagger.io/support

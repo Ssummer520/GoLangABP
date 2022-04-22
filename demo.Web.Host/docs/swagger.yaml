@@ -30,12 +30,12 @@ info:
     email: support@swagger.io
     name: "1362"
     url: http://www.swagger.io/support
-  description: ExamCodeAboutTeslaByGin
+  description: 参考ABP 框架搭建
   license:
     name: Apache 2.0
     url: http://www.apache.org/licenses/LICENSE-2.0.html
   termsOfService: http://swagger.io/terms/
-  title: ExamCodeAboutTeslaByGin
+  title: GoLangWebFrameWork
   version: "1.0"
 paths:
   /User:
