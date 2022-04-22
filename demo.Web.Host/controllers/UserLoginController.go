@@ -8,9 +8,9 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-type UserLogin struct {
-	User   userService.IUserService `inject:""`
-	Source IJWTHelper               `inject:""`
+type UserLoginController struct {
+	User *userService.UserService `inject:""`
+	Jwt  IJWTHelper               `inject:""`
 }
 
 // LoginHandler
@@ -22,7 +22,7 @@ type UserLogin struct {
 // @Router   /login [post]
 // @Success 200 {string} string "{"Success": true,"Token":"5545"}"
 // @Failure 400 {string} string "{"msg": "who are you"}"
-func (u *UserLogin) LoginHandler(c *gin.Context) {
+func (u *UserLoginController) LoginHandler(c *gin.Context) {
 	var dto UserLoginInputDto
 	c.ShouldBind(&dto)
 	success := u.User.Login(dto)
@@ -32,7 +32,7 @@ func (u *UserLogin) LoginHandler(c *gin.Context) {
 		claims.ID = "1"
 		claims.Phone = "17343016071"
 		claims.Name = "17343016071"
-		token = u.Source.GenerateToken(claims)
+		token = u.Jwt.GenerateToken(claims)
 	}
 
 	c.JSON(200, gin.H{

@@ -7,5 +7,5 @@ import (
 
 type IUserRepository interface {
 	FirstOrDefault() *Model.UserInfo
-	Add(input UserAddInputDto) *UserAddOutPutDto
+	Add(input UserAddInputDto) UserAddOutPutDto
 }

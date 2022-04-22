@@ -62,29 +62,6 @@ paths:
       summary: 用户登录
       tags:
       - UserLogin 登录相关
-  /name:
-    get:
-      consumes:
-      - application/json
-      parameters:
-      - description: Bearer 用户令牌
-        in: header
-        name: Authorization
-        type: string
-      produces:
-      - application/json
-      responses:
-        "200":
-          description: '{"car":"211221321"}'
-          schema:
-            type: string
-        "400":
-          description: '{"msg": "who are you"}'
-          schema:
-            type: string
-      summary: 获取最新age
-      tags:
-      - Index 依赖注入相关
   /user:
     post:
       consumes:

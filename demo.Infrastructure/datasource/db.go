@@ -29,7 +29,8 @@ func (d *Db) Connect() error {
 		return err
 	}
 	d.Conn = db
-
+	db.SetMaxOpenConns(200)
+	db.SetMaxIdleConns(10)
 	log.Println("Connect Mysql Success")
 
 	return nil

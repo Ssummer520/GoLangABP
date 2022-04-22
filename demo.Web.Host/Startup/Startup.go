@@ -1,12 +1,9 @@
 package Startup
 
 import (
-	service "GoLangABP/demo.Application/start"
-	userService "GoLangABP/demo.Application/user"
-	rep "GoLangABP/demo.Infrastructure"
+	repository "GoLangABP/demo.Infrastructure"
 	"GoLangABP/demo.Infrastructure/datasource"
 	. "GoLangABP/demo.Web.Host/Authentication"
-	. "GoLangABP/demo.Web.Host/controllers"
 	_ "GoLangABP/demo.Web.Host/docs" // 千万不要忘了导入把你上一步生成的docs
 	"github.com/facebookgo/inject"
 	"github.com/gin-contrib/cors"
@@ -18,34 +15,25 @@ import (
 
 func Configure(r *gin.Engine) {
 
-	//controller declare
-	var index Index
-	var userLogin UserLogin
-	var user User
-	indexR = &index
-	userLoginR = &userLogin
-	userR = &user
-	//inject declare
 	db := datasource.Db{}
 	//redis := cache.Redis{}
 	//rabbit := rabbitmq.Mq{}
+	var server = &Server{}
+	var jwtHelper = &JWTHelper{}
+	Api = server
+	JwtR = jwtHelper
 
 	//Injection
 	var injector inject.Graph
 	err := injector.Provide(
-		&inject.Object{Value: &index},
-		&inject.Object{Value: &user},
-		&inject.Object{Value: &userLogin},
+		&inject.Object{Value: server},
+		&inject.Object{Value: &repository.UserRepository{}},
 		&inject.Object{Value: &db},
-		//&inject.Object{Value: &repository.StartRepo{}},
-		&inject.Object{Value: &service.StartService{}},
-		&inject.Object{Value: &rep.UserRepository{}},
-		&inject.Object{Value: &userService.UserService{}},
-		&inject.Object{Value: &JWTHelper{}},
+
+		&inject.Object{Value: jwtHelper},
 
 		//&inject.Object{Value: &redis},
 		//&inject.Object{Value: &rabbit},
-
 	)
 
 	if err != nil {
