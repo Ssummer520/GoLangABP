@@ -1,7 +1,7 @@
 package datasource
 
 import (
-	. "GoLangABP/demo.Web.Host/conf"
+	. "GoLangABP/demo.Web.Host/Conf"
 	"fmt"
 	_ "github.com/go-sql-driver/mysql"
 	"github.com/jmoiron/sqlx"
@@ -14,11 +14,11 @@ type Db struct {
 
 func (d *Db) Connect() error {
 	conf := Configs.Database
-	//dbType = conf.Type
-	//dbName = conf.Name
-	//user = conf.User
-	//pwd = conf.Password
-	//host = conf.Host
+	//dbType = Conf.Type
+	//dbName = Conf.Name
+	//User = Conf.User
+	//pwd = Conf.Password
+	//host = Conf.Host
 
 	dsn := conf.User + ":" + conf.Password + "@tcp(127.0.0.1:3306)/demo?charset=utf8mb4&parseTime=True&loc=Local"
 	fmt.Println(dsn)

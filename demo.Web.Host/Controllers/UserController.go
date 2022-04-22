@@ -1,7 +1,7 @@
-package controllers
+package Controllers
 
 import (
-	service "GoLangABP/demo.Application/user"
+	service "GoLangABP/demo.Application/User"
 	. "GoLangABP/demo.Core/Dto"
 	"fmt"
 	"github.com/gin-gonic/gin"
@@ -17,7 +17,7 @@ type UserController struct {
 // @Tags     User 用户相关
 // @Accept   application/json
 // @Produce  application/json
-// @Router   /user [post]
+// @Router   /User [post]
 // @Param object body UserAddInputDto false "请求参数"
 func (u *UserController) AddUserNameHandler(c *gin.Context) {
 	var addModel = UserAddInputDto{}

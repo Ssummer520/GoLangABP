@@ -1,4 +1,4 @@
-package conf
+package Conf
 
 import (
 	"gopkg.in/yaml.v2"
@@ -26,7 +26,7 @@ type Server struct {
 
 type Database struct {
 	Type        string `yaml:"type"`
-	User        string `yaml:"user"`
+	User        string `yaml:"User"`
 	Password    string `yaml:"password"`
 	Host        string `yaml:"host"`
 	Name        string `yaml:"name"`
@@ -44,7 +44,7 @@ type Redis struct {
 type RabbitMQ struct {
 	Addr string `yaml:"addr"`
 	Port int    `yaml:"port"`
-	User string `yaml:"user"`
+	User string `yaml:"User"`
 	Pass string `yaml:"pass"`
 }
 
@@ -55,7 +55,7 @@ func init() {
 
 func getConf() *Conf {
 	var c *Conf
-	file, err := ioutil.ReadFile("demo.Web.Host/conf/Config.yml")
+	file, err := ioutil.ReadFile("demo.Web.Host/Conf/Config.yml")
 
 	if err != nil {
 		log.Println("config error: ", err)

@@ -25,6 +25,31 @@ const docTemplate = `{
     "host": "{{.Host}}",
     "basePath": "{{.BasePath}}",
     "paths": {
+        "/User": {
+            "post": {
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "User 用户相关"
+                ],
+                "summary": "新增用户信息",
+                "parameters": [
+                    {
+                        "description": "请求参数",
+                        "name": "object",
+                        "in": "body",
+                        "schema": {
+                            "$ref": "#/definitions/dto.UserAddInputDto"
+                        }
+                    }
+                ],
+                "responses": {}
+            }
+        },
         "/login": {
             "post": {
                 "consumes": [
@@ -61,31 +86,6 @@ const docTemplate = `{
                         }
                     }
                 }
-            }
-        },
-        "/user": {
-            "post": {
-                "consumes": [
-                    "application/json"
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "tags": [
-                    "User 用户相关"
-                ],
-                "summary": "新增用户信息",
-                "parameters": [
-                    {
-                        "description": "请求参数",
-                        "name": "object",
-                        "in": "body",
-                        "schema": {
-                            "$ref": "#/definitions/dto.UserAddInputDto"
-                        }
-                    }
-                ],
-                "responses": {}
             }
         }
     },

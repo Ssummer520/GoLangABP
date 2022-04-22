@@ -1,7 +1,7 @@
-package controllers
+package Controllers
 
 import (
-	userService "GoLangABP/demo.Application/user"
+	userService "GoLangABP/demo.Application/User"
 	. "GoLangABP/demo.Core/Dto"
 	. "GoLangABP/demo.Web.Host/Authentication"
 	jwt "GoLangABP/demo.Web.Host/Authentication"

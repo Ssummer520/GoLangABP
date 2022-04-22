@@ -69,7 +69,7 @@ func (j *JWTHelper) JwtVerify(c *gin.Context) {
 		panic(errObject)
 	}
 	//验证token，并存储在请求中
-	c.Set("user", j.parseToken(token))
+	c.Set("User", j.parseToken(token))
 }
 
 // 解析Token

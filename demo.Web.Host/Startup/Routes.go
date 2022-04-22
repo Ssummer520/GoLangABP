@@ -2,7 +2,7 @@ package Startup
 
 import (
 	"GoLangABP/demo.Web.Host/Authentication"
-	. "GoLangABP/demo.Web.Host/controllers"
+	. "GoLangABP/demo.Web.Host/Controllers"
 
 	"github.com/gin-gonic/gin"
 )
@@ -18,7 +18,7 @@ var Api = &Server{}
 
 func ConfigureRoute(r *gin.Engine) {
 	//controller declare
-	r.POST("/user", Api.UserApi.AddUserNameHandler)
+	r.POST("/User", Api.UserApi.AddUserNameHandler)
 	r.POST("/login", Api.UserLoginApi.LoginHandler)
 	r.Use(JwtR.JwtVerify)
 
