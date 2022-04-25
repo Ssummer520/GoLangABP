@@ -3,7 +3,7 @@ package Controllers
 import (
 	service "GoLangABP/demo.Application/User"
 	. "GoLangABP/demo.Core/Dto"
-	"fmt"
+	"GoLangABP/demo.Core/Model"
 	"github.com/gin-gonic/gin"
 )
 
@@ -21,11 +21,15 @@ type UserController struct {
 // @Param object body UserAddInputDto false "请求参数"
 func (u *UserController) AddUserNameHandler(c *gin.Context) {
 	var addModel = UserAddInputDto{}
-	c.ShouldBind(&addModel)
+	err := c.ShouldBind(&addModel)
+	if err != nil {
+		return
+	}
 	ret := u.Service.Add(addModel)
-	fmt.Println(ret)
-	c.JSON(200, gin.H{
-		"success": ret.Success,
-		"error":   ret.Error,
-	})
+	object := Model.RetObject{
+		Success: ret.Success,
+		Data:    ret.Success,
+		Message: ret.Error,
+	}
+	c.JSON(200, object)
 }
