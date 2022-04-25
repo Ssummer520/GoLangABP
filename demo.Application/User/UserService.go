@@ -17,13 +17,11 @@ type UserService struct {
 func (u *UserService) Login(input dto.UserLoginInputDto) bool {
 
 	var outPut = &dto.UserLoginOutPutDto{}
-	fmt.Println(input.PassWord, input.Name)
 	userModel := u.S.FirstOrDefault()
 	err := MapperHelper.Mapper(userModel, outPut)
 	if err != nil {
 		fmt.Println(err)
 	}
-	fmt.Println(input.Name, outPut.Name, input.PassWord, outPut.PassWord)
 	if input.PassWord != outPut.PassWord || input.Name != outPut.Name {
 		return false
 	}

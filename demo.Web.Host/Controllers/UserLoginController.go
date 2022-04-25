@@ -3,6 +3,7 @@ package Controllers
 import (
 	userService "GoLangABP/demo.Application/User"
 	. "GoLangABP/demo.Core/Dto"
+	"GoLangABP/demo.Core/Model"
 	. "GoLangABP/demo.Web.Host/Authentication"
 	jwt "GoLangABP/demo.Web.Host/Authentication"
 	"github.com/gin-gonic/gin"
@@ -26,6 +27,7 @@ func (u *UserLoginController) LoginHandler(c *gin.Context) {
 	var dto UserLoginInputDto
 	c.ShouldBind(&dto)
 	success := u.User.Login(dto)
+	message := ""
 	token := ""
 	if success {
 		claims := &jwt.UserClaims{}
@@ -35,8 +37,10 @@ func (u *UserLoginController) LoginHandler(c *gin.Context) {
 		token = u.Jwt.GenerateToken(claims)
 	}
 
-	c.JSON(200, gin.H{
-		"Success": success,
-		"Token":   token,
-	})
+	object := Model.RetObject{
+		Success: success,
+		Data:    token,
+		Message: message,
+	}
+	c.JSON(200, object)
 }
