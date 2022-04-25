@@ -29,7 +29,6 @@ func Configure(r *gin.Engine) {
 		&inject.Object{Value: server},
 		&inject.Object{Value: &repository.UserRepository{}},
 		&inject.Object{Value: &db},
-
 		&inject.Object{Value: jwtHelper},
 
 		//&inject.Object{Value: &redis},

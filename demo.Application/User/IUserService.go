@@ -8,6 +8,6 @@ type IUserService interface {
 	Login(input dto.UserLoginInputDto) bool
 	// Add 新增用户
 	Add(input dto.UserAddInputDto) dto.UserAddOutPutDto
-	//// List 获取用户列表
-	//List() []dto.UserAddOutPutDto
+	// List 获取用户列表
+	List() []dto.UserAddOutPutDto
 }

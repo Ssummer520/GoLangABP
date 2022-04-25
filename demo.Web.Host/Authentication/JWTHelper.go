@@ -1,6 +1,7 @@
 package Authentication
 
 import (
+	"GoLangABP/demo.Core/Model"
 	"fmt"
 	//"awesomeProject/utils"
 	"github.com/dgrijalva/jwt-go"
@@ -65,8 +66,15 @@ func (j *JWTHelper) JwtVerify(c *gin.Context) {
 	}
 	token := c.GetHeader("Authorization")
 	if token == "" {
-		errObject = "token not exist !"
-		panic(errObject)
+		errObject := "token not exist !"
+
+		c.JSON(200, Model.RetObject{
+			Success: false,
+			Data:    nil,
+			Message: errObject,
+		})
+		c.Abort()
+		return
 	}
 	//验证token，并存储在请求中
 	c.Set("User", j.parseToken(token))

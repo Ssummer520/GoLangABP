@@ -31,7 +31,10 @@ func (u *UserService) Add(input dto.UserAddInputDto) dto.UserAddOutPutDto {
 	userAddOutPutDto := u.Rep.Add(input)
 	return userAddOutPutDto
 }
-func (u *UserService) List() []dto.UserAddOutPutDto {
-	userAddOutPutDto := u.Rep.List()
-	return userAddOutPutDto
+func (u *UserService) List() []dto.UserListOutPutDto {
+	userInfo := u.Rep.List()
+	var retModel []dto.UserListOutPutDto
+	MapperHelper.MapperSlice(&userInfo, &retModel)
+	fmt.Println(retModel)
+	return retModel
 }

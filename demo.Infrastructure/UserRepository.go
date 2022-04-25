@@ -26,7 +26,7 @@ func (t *UserRepository) Add(input dto.UserAddInputDto) dto.UserAddOutPutDto {
 	isSuccess := true
 	var id int64
 	error := ""
-	result, err := t.SqlDb.DB().Exec("INSERT INTO userinfo (`name`, `phone`,  `password`) VALUES (?, ?, ?)",
+	result, err := t.SqlDb.DB().Exec("INSERT INTO userinfo (`name`, `phone`, 'age', `password`) VALUES (?, ?, ?)",
 		input.Name, input.Phone, input.PassWord)
 	if err != nil {
 		error = err.Error()
@@ -47,11 +47,13 @@ func (t *UserRepository) Add(input dto.UserAddInputDto) dto.UserAddOutPutDto {
 	return *ret
 }
 
-func (t *UserRepository) List() []dto.UserAddOutPutDto {
-	var list []dto.UserAddOutPutDto
-	err := t.SqlDb.DB().Select(nil, "select * from userinfo", &list)
+func (t *UserRepository) List() []UserInfo {
+	var list []UserInfo
+	err := t.SqlDb.DB().Select(&list, "select name,age,phone,password from userinfo")
 	if err != nil {
-		fmt.Println("errrrr")
+		fmt.Println(11111)
+		fmt.Println(err)
 	}
+	fmt.Println(list)
 	return list
 }
