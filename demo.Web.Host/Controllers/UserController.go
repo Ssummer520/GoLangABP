@@ -33,3 +33,23 @@ func (u *UserController) AddUserNameHandler(c *gin.Context) {
 	}
 	c.JSON(200, object)
 }
+
+// GetUserListHandler
+// @Summary  获取用户列表
+// @Tags     User 获取用户列表
+// @Accept   application/json
+// @Produce  application/json
+// @Router   /user/list [get]
+// @Param Authorization header string false "Bearer 用户令牌"
+func (u *UserController) GetUserListHandler(c *gin.Context) {
+	c.Abort()
+	object := Model.RetObject{}
+	ret := u.Service.List()
+	if ret == nil && len(ret) == 0 {
+		object.Success = false
+		object.Message = "未获取到任何数据"
+	} else {
+		object.Data = ret
+	}
+	c.JSON(200, object)
+}

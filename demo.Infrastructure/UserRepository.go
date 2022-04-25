@@ -49,3 +49,12 @@ func (t *UserRepository) Add(input dto.UserAddInputDto) dto.UserAddOutPutDto {
 	fmt.Println(1111)
 	return *ret
 }
+
+func (t *UserRepository) List() []dto.UserAddOutPutDto {
+	var list []dto.UserAddOutPutDto
+	err := t.SqlDb.DB().Select(nil, "select * from userinfo", &list)
+	if err != nil {
+		fmt.Println("errrrr")
+	}
+	return list
+}

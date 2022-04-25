@@ -78,4 +78,19 @@ paths:
       summary: 用户登录
       tags:
       - UserLogin 登录相关
+  /user/list:
+    get:
+      consumes:
+      - application/json
+      parameters:
+      - description: Bearer 用户令牌
+        in: header
+        name: Authorization
+        type: string
+      produces:
+      - application/json
+      responses: {}
+      summary: 获取用户列表
+      tags:
+      - User 获取用户列表
 swagger: "2.0"

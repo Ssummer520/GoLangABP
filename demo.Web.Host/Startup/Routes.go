@@ -18,8 +18,9 @@ var Api = &Server{}
 
 func ConfigureRoute(r *gin.Engine) {
 	//controller declare
-	r.POST("/User", Api.UserApi.AddUserNameHandler)
+	r.POST("/user", Api.UserApi.AddUserNameHandler)
 	r.POST("/login", Api.UserLoginApi.LoginHandler)
 	r.Use(JwtR.JwtVerify)
+	r.GET("/user/list", Api.UserApi.GetUserListHandler)
 
 }

@@ -23,7 +23,6 @@ import (
 /*  @host localhost:8888*/
 
 func main() {
-	/*  @host 124.220.12.138:8888*/
 	envPort := ""
 	gin.SetMode(gin.DebugMode)
 	if gin.Mode() == gin.ReleaseMode {
