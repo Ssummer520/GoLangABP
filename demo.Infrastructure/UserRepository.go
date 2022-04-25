@@ -29,24 +29,21 @@ func (t *UserRepository) Add(input dto.UserAddInputDto) dto.UserAddOutPutDto {
 	result, err := t.SqlDb.DB().Exec("INSERT INTO userinfo (`name`, `phone`,  `password`) VALUES (?, ?, ?)",
 		input.Name, input.Phone, input.PassWord)
 	if err != nil {
+		error = err.Error()
 		isSuccess = false
-		fmt.Println("errrrr")
 	} else {
 		fmt.Println(result)
 		id, err = result.LastInsertId()
 		if err != nil {
-			fmt.Println("errrrr")
 			isSuccess = false
-			fmt.Println(err)
+			error = err.Error()
 		}
 	}
-	fmt.Println(1111)
 	ret := &dto.UserAddOutPutDto{
 		Success: isSuccess,
 		Id:      id,
 		Error:   error,
 	}
-	fmt.Println(1111)
 	return *ret
 }
 
