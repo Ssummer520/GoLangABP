@@ -5,6 +5,7 @@ import (
 	"fmt"
 	_ "github.com/go-sql-driver/mysql"
 	"github.com/jmoiron/sqlx"
+	"k8s.io/klog/v2"
 	"log"
 )
 
@@ -25,7 +26,7 @@ func (d *Db) Connect() error {
 	db, err := sqlx.Connect("mysql", dsn)
 
 	if err != nil {
-		fmt.Println(err)
+		klog.Error(err)
 		return err
 	}
 	d.Conn = db

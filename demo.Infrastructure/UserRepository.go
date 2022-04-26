@@ -5,6 +5,7 @@ import (
 	. "GoLangABP/demo.Core/Model"
 	"GoLangABP/demo.Infrastructure/datasource"
 	"fmt"
+	"k8s.io/klog/v2"
 )
 
 // UserRepository  注入数据库
@@ -18,7 +19,7 @@ func (t *UserRepository) FirstOrDefault(name string, phone string) *UserInfo {
 	err := t.SqlDb.DB().Get(user, "select name,phone,age,password from userinfo  where name=? && phone=? limit 1",
 		name, phone)
 	if err != nil {
-		fmt.Println(err)
+		klog.Error(err)
 	}
 	return user
 }
@@ -32,13 +33,14 @@ func (t *UserRepository) Add(input dto.UserAddInputDto) dto.UserAddOutPutDto {
 		input.Name, input.Phone, input.Age, input.PassWord)
 	if err != nil {
 		error = err.Error()
+		klog.Error(err)
 		isSuccess = false
 	} else {
 		fmt.Println(result)
 		id, err = result.LastInsertId()
 		if err != nil {
 			isSuccess = false
-			error = err.Error()
+			klog.Error(err)
 		}
 	}
 	ret := &dto.UserAddOutPutDto{
@@ -53,10 +55,8 @@ func (t *UserRepository) List() []UserInfo {
 	var list []UserInfo
 	err := t.SqlDb.DB().Select(&list, "select name,age,phone,password from userinfo")
 	if err != nil {
-		fmt.Println(11111)
-		fmt.Println(err)
+		klog.Error(err)
 	}
-	fmt.Println(list)
 	return list
 }
 func (t *UserRepository) CheckUserInfo(name string, phone string) bool {
@@ -64,7 +64,7 @@ func (t *UserRepository) CheckUserInfo(name string, phone string) bool {
 	err := t.SqlDb.DB().Get(user, "select name,phone,age,password from userinfo  where name=? || phone=? limit 1",
 		name, phone)
 	if err != nil {
-		fmt.Println(err)
+		klog.Error(err)
 	}
 	if user != nil {
 		return true
