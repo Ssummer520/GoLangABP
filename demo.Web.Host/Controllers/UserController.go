@@ -20,18 +20,28 @@ type UserController struct {
 // @Router   /user [post]
 // @Param object body UserAddInputDto false "请求参数"
 func (u *UserController) AddUserNameHandler(c *gin.Context) {
-	var addModel = UserAddInputDto{}
-	err := c.ShouldBind(&addModel)
+	retObject := Model.RetObject{}
+	var input = UserAddInputDto{}
+	err := c.ShouldBind(&input)
 	if err != nil {
-		return
+		retObject.Success = false
+		retObject.Data = false
+		retObject.Message = "不合法的输入数据"
+	} else {
+
+		isExist := u.Service.CheckUserInfo(input.Name, input.Phone)
+		if isExist {
+			retObject.Success = false
+			retObject.Data = false
+			retObject.Message = "姓名或手机号码已存在"
+		} else {
+			ret := u.Service.Add(input)
+			retObject.Data = ret.Success
+			retObject.Success = ret.Success
+			retObject.Message = ret.Error
+		}
 	}
-	ret := u.Service.Add(addModel)
-	object := Model.RetObject{
-		Success: ret.Success,
-		Data:    ret.Success,
-		Message: ret.Error,
-	}
-	c.JSON(200, object)
+	c.JSON(200, retObject)
 }
 
 // GetUserListHandler
@@ -43,13 +53,13 @@ func (u *UserController) AddUserNameHandler(c *gin.Context) {
 // @Param Authorization header string false "Bearer 用户令牌"
 func (u *UserController) GetUserListHandler(c *gin.Context) {
 	c.Abort()
-	object := Model.RetObject{}
+	retObject := Model.RetObject{}
 	ret := u.Service.List()
 	if ret == nil && len(ret) == 0 {
-		object.Success = false
-		object.Message = "未获取到任何数据"
+		retObject.Success = false
+		retObject.Message = "未获取到任何数据"
 	} else {
-		object.Data = ret
+		retObject.Data = ret
 	}
-	c.JSON(200, object)
+	c.JSON(200, retObject)
 }

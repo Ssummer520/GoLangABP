@@ -37,10 +37,10 @@ func (u *UserLoginController) LoginHandler(c *gin.Context) {
 		token = u.Jwt.GenerateToken(claims)
 	}
 
-	object := Model.RetObject{
+	retObject := Model.RetObject{
 		Success: success,
 		Data:    token,
 		Message: message,
 	}
-	c.JSON(200, object)
+	c.JSON(200, retObject)
 }
