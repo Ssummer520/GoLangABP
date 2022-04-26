@@ -7,7 +7,7 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-// User  注入IStartService
+// UserController User  注入IStartService
 type UserController struct {
 	Service *service.UserService `inject:""`
 }
@@ -17,7 +17,7 @@ type UserController struct {
 // @Tags     User 用户相关
 // @Accept   application/json
 // @Produce  application/json
-// @Router   /User [post]
+// @Router   /user [post]
 // @Param object body UserAddInputDto false "请求参数"
 func (u *UserController) AddUserNameHandler(c *gin.Context) {
 	var addModel = UserAddInputDto{}
