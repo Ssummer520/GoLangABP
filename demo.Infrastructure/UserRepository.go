@@ -26,8 +26,9 @@ func (t *UserRepository) Add(input dto.UserAddInputDto) dto.UserAddOutPutDto {
 	isSuccess := true
 	var id int64
 	error := ""
-	result, err := t.SqlDb.DB().Exec("INSERT INTO userinfo (`name`, `phone`, 'age', `password`) VALUES (?, ?, ?)",
-		input.Name, input.Phone, input.PassWord)
+
+	result, err := t.SqlDb.DB().Exec("INSERT INTO userinfo (`name`, `phone`, `age`, `password`) VALUES (?, ?, ?,?)",
+		input.Name, input.Phone, input.Age, input.PassWord)
 	if err != nil {
 		error = err.Error()
 		isSuccess = false

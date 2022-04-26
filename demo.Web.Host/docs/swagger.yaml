@@ -38,22 +38,6 @@ info:
   title: GoLangWebFrameWork
   version: "1.0"
 paths:
-  /User:
-    post:
-      consumes:
-      - application/json
-      parameters:
-      - description: 请求参数
-        in: body
-        name: object
-        schema:
-          $ref: '#/definitions/dto.UserAddInputDto'
-      produces:
-      - application/json
-      responses: {}
-      summary: 新增用户信息
-      tags:
-      - User 用户相关
   /login:
     post:
       consumes:
@@ -78,6 +62,22 @@ paths:
       summary: 用户登录
       tags:
       - UserLogin 登录相关
+  /user:
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: 请求参数
+        in: body
+        name: object
+        schema:
+          $ref: '#/definitions/dto.UserAddInputDto'
+      produces:
+      - application/json
+      responses: {}
+      summary: 新增用户信息
+      tags:
+      - User 用户相关
   /user/list:
     get:
       consumes:
