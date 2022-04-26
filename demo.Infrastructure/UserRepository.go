@@ -13,9 +13,10 @@ type UserRepository struct {
 }
 
 // FirstOrDefault FirstOrDefault
-func (t *UserRepository) FirstOrDefault() *UserInfo {
+func (t *UserRepository) FirstOrDefault(name string, phone string) *UserInfo {
 	var user = &UserInfo{}
-	err := t.SqlDb.DB().Get(user, "select name,phone,age,password from userinfo limit 1")
+	err := t.SqlDb.DB().Get(user, "select name,phone,age,password from userinfo  where name=? && phone=? limit 1",
+		name, phone)
 	if err != nil {
 		fmt.Println(err)
 	}
@@ -57,4 +58,16 @@ func (t *UserRepository) List() []UserInfo {
 	}
 	fmt.Println(list)
 	return list
+}
+func (t *UserRepository) CheckUserInfo(name string, phone string) bool {
+	var user = &UserInfo{}
+	err := t.SqlDb.DB().Get(user, "select name,phone,age,password from userinfo  where name=? || phone=? limit 1",
+		name, phone)
+	if err != nil {
+		fmt.Println(err)
+	}
+	if user != nil {
+		return true
+	}
+	return false
 }

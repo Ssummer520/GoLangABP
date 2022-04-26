@@ -10,4 +10,6 @@ type IUserService interface {
 	Add(input dto.UserAddInputDto) dto.UserAddOutPutDto
 	// List 获取用户列表
 	List() []dto.UserAddOutPutDto
+	//CheckUserInfo 新增用户时判断user信息是否已经存在
+	CheckUserInfo(name string, phone string) bool
 }

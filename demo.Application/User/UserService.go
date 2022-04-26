@@ -17,7 +17,7 @@ type UserService struct {
 func (u *UserService) Login(input dto.UserLoginInputDto) bool {
 
 	var outPut = &dto.UserLoginOutPutDto{}
-	userModel := u.Rep.FirstOrDefault()
+	userModel := u.Rep.FirstOrDefault(input.Name, input.PassWord)
 	err := MapperHelper.Mapper(userModel, outPut)
 	if err != nil {
 		fmt.Println(err)
@@ -37,4 +37,8 @@ func (u *UserService) List() []dto.UserListOutPutDto {
 	MapperHelper.MapperSlice(&userInfo, &retModel)
 	fmt.Println(retModel)
 	return retModel
+}
+func (u *UserService) CheckUserInfo(name string, phone string) bool {
+	isExist := u.Rep.CheckUserInfo(name, phone)
+	return isExist
 }
