@@ -64,6 +64,10 @@ func (t *UserRepository) CheckUserInfo(name string, phone string) bool {
 	err := t.SqlDb.DB().Get(user, "select name,phone,age,password from userinfo  where name=? || phone=? limit 1",
 		name, phone)
 	if err != nil {
+		klog.Error(err)
+		if err.Error() == "sql: no rows in result set" {
+			return false
+		}
 		return true
 	}
 	klog.Info(user)
