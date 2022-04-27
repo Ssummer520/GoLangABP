@@ -3,7 +3,7 @@ package Controllers
 import (
 	service "GoLangABP/demo.Application/User"
 	. "GoLangABP/demo.Core/Dto"
-	"GoLangABP/demo.Core/Model"
+	. "GoLangABP/demo.Core/Model"
 	"github.com/gin-gonic/gin"
 )
 
@@ -20,7 +20,7 @@ type UserController struct {
 // @Router   /user [post]
 // @Param object body UserAddInputDto false "请求参数"
 func (u *UserController) AddUserNameHandler(c *gin.Context) {
-	retObject := Model.RetObject{}
+	retObject := RetObject{}
 	var input = UserAddInputDto{}
 	err := c.ShouldBind(&input)
 	if err != nil {
@@ -50,11 +50,13 @@ func (u *UserController) AddUserNameHandler(c *gin.Context) {
 // @Accept   application/json
 // @Produce  application/json
 // @Router   /user/list [get]
+//@Success 200 object RetObject{data=[]UserListOutPutDto} 成功后返回值
 // @Param Authorization header string false "Bearer 用户令牌"
 func (u *UserController) GetUserListHandler(c *gin.Context) {
 	c.Abort()
-	retObject := Model.RetObject{}
+	retObject := RetObject{}
 	ret := u.Service.List()
+
 	if ret == nil && len(ret) == 0 {
 		retObject.Success = false
 		retObject.Message = "未获取到任何数据"
