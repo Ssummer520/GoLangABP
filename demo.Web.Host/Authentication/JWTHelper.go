@@ -2,7 +2,8 @@ package Authentication
 
 import (
 	"GoLangABP/demo.Core/Model"
-	"fmt"
+	"k8s.io/klog/v2"
+
 	//"awesomeProject/utils"
 	"github.com/dgrijalva/jwt-go"
 	"github.com/gin-gonic/gin"
@@ -44,8 +45,7 @@ func (j *JWTHelper) GenerateToken(claims *UserClaims) string {
 	if err != nil {
 		//这里因为项目接入了统一异常处理，所以使用panic并不会使程序终止，如不接入，可使用原始方式处理错误
 		//接入统一异常可参考 https://blog.csdn.net/u014155085/article/details/106733391
-		errObject = err
-		panic(errObject)
+		klog.Error(err)
 	}
 	return sign
 }
@@ -88,16 +88,13 @@ func (j *JWTHelper) parseToken(tokenString string) *UserClaims {
 		return secret, nil
 	})
 	if err != nil {
-		var v1 interface{}
-		v1 = err
-		panic(v1)
+		klog.Error(err)
 	}
 	claims, ok := token.Claims.(*UserClaims)
 	if !ok {
 		errObject = "token is valid"
-		panic(errObject)
+		klog.Error(errObject)
 	}
-	fmt.Println(111)
 	return claims
 }
 
@@ -110,13 +107,11 @@ func (j *JWTHelper) Refresh(tokenString string) string {
 		return secret, nil
 	})
 	if err != nil {
-		errObject = err
-		panic(errObject)
+		klog.Error(err)
 	}
 	claims, ok := token.Claims.(*UserClaims)
 	if !ok {
-		errObject = "token is valid"
-		panic(errObject)
+		klog.Error(err)
 	}
 	jwt.TimeFunc = time.Now
 	claims.StandardClaims.ExpiresAt = time.Now().Add(2 * time.Hour).Unix()
