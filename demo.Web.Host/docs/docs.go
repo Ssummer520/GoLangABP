@@ -108,11 +108,47 @@ const docTemplate = `{
                         "in": "header"
                     }
                 ],
-                "responses": {}
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/Model.RetObject"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/definitions/dto.UserListOutPutDto"
+                                            }
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    }
+                }
             }
         }
     },
     "definitions": {
+        "Model.RetObject": {
+            "type": "object",
+            "properties": {
+                "data": {
+                    "type": "any"
+                },
+                "message": {
+                    "type": "string"
+                },
+                "success": {
+                    "type": "boolean"
+                }
+            }
+        },
         "dto.UserAddInputDto": {
             "type": "object",
             "properties": {
@@ -135,6 +171,20 @@ const docTemplate = `{
                 "sex": {
                     "description": "性别",
                     "type": "integer"
+                }
+            }
+        },
+        "dto.UserListOutPutDto": {
+            "type": "object",
+            "properties": {
+                "age": {
+                    "type": "integer"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "phone": {
+                    "type": "string"
                 }
             }
         },

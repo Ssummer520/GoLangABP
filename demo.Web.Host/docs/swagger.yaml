@@ -1,4 +1,13 @@
 definitions:
+  Model.RetObject:
+    properties:
+      data:
+        type: any
+      message:
+        type: string
+      success:
+        type: boolean
+    type: object
   dto.UserAddInputDto:
     properties:
       age:
@@ -16,6 +25,15 @@ definitions:
       sex:
         description: 性别
         type: integer
+    type: object
+  dto.UserListOutPutDto:
+    properties:
+      age:
+        type: integer
+      name:
+        type: string
+      phone:
+        type: string
     type: object
   dto.UserLoginInputDto:
     properties:
@@ -89,7 +107,18 @@ paths:
         type: string
       produces:
       - application/json
-      responses: {}
+      responses:
+        "200":
+          description: OK
+          schema:
+            allOf:
+            - $ref: '#/definitions/Model.RetObject'
+            - properties:
+                data:
+                  items:
+                    $ref: '#/definitions/dto.UserListOutPutDto'
+                  type: array
+              type: object
       summary: 获取用户列表
       tags:
       - User 获取用户列表
