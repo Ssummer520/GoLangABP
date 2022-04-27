@@ -2,6 +2,7 @@ package Authentication
 
 import (
 	"GoLangABP/demo.Core/Model"
+	"fmt"
 	"k8s.io/klog/v2"
 
 	//"awesomeProject/utils"
@@ -111,7 +112,7 @@ func (j *JWTHelper) Refresh(tokenString string) string {
 	}
 	claims, ok := token.Claims.(*UserClaims)
 	if !ok {
-		klog.Error(err)
+		klog.Error(fmt.Sprint("解析错误"))
 	}
 	jwt.TimeFunc = time.Now
 	claims.StandardClaims.ExpiresAt = time.Now().Add(2 * time.Hour).Unix()

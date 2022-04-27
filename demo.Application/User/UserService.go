@@ -33,8 +33,12 @@ func (u *UserService) Add(input dto.UserAddInputDto) dto.UserAddOutPutDto {
 }
 func (u *UserService) List() []dto.UserListOutPutDto {
 	userInfo := u.Rep.List()
-	var retModel []dto.UserListOutPutDto
-	MapperHelper.MapperSlice(&userInfo, &retModel)
+	retModel := make([]dto.UserListOutPutDto, 0)
+	klog.Info(userInfo)
+	err := MapperHelper.MapperSlice(&userInfo, &retModel)
+	if err != nil {
+		klog.Info(retModel)
+	}
 	klog.Info(retModel)
 	return retModel
 }

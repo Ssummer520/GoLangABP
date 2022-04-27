@@ -1,7 +1,7 @@
 package dto
 
 type UserListOutPutDto struct {
-	Name  string `json:"name"`
-	Age   int    `json:"age"`
-	Phone string `json:"phone"`
+	Name  string `json:"name" mapper:"Name"`
+	Age   int    `json:"age" mapper:"Age"`
+	Phone string `json:"phone" mapper:"Phone"`
 }

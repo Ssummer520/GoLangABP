@@ -3,7 +3,6 @@ package main
 import (
 	"GoLangABP/demo.Web.Host/Startup"
 	_ "GoLangABP/demo.Web.Host/docs" // 千万不要忘了导入把你上一步生成的docs
-	"fmt"
 	"github.com/gin-gonic/gin"
 	"os"
 )
@@ -17,12 +16,14 @@ import (
 // @contact.email   support@swagger.io
 // @license.name    Apache 2.0
 // @license.url     http://www.apache.org/licenses/LICENSE-2.0.html
-// @host            localhost:8181
+// @host            localhost:8889
 // @BasePath
 
-/*  @host localhost:8888*/
-
 func main() {
+	/*  @host localhost:8889
+	124.220.12.138:8889
+
+	*/
 	envPort := ""
 	gin.SetMode(gin.DebugMode)
 	if gin.Mode() == gin.ReleaseMode {
@@ -31,9 +32,8 @@ func main() {
 	r := gin.New()
 	Startup.Configure(r)
 	if gin.Mode() == gin.ReleaseMode {
-		fmt.Println(gin.Mode())
 		_ = r.Run(":" + envPort)
 	} else {
-		_ = r.Run(":8181")
+		_ = r.Run(":8889")
 	}
 }

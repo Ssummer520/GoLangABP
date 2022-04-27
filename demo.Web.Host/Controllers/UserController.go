@@ -5,6 +5,7 @@ import (
 	. "GoLangABP/demo.Core/Dto"
 	. "GoLangABP/demo.Core/Model"
 	"github.com/gin-gonic/gin"
+	"k8s.io/klog/v2"
 )
 
 // UserController User  注入IStartService
@@ -41,6 +42,7 @@ func (u *UserController) AddUserNameHandler(c *gin.Context) {
 			retObject.Message = ret.Error
 		}
 	}
+	klog.Info(retObject)
 	c.JSON(200, retObject)
 }
 
@@ -53,15 +55,16 @@ func (u *UserController) AddUserNameHandler(c *gin.Context) {
 //@Success 200 object RetObject{data=[]UserListOutPutDto} 成功后返回值
 // @Param Authorization header string false "Bearer 用户令牌"
 func (u *UserController) GetUserListHandler(c *gin.Context) {
-	c.Abort()
 	retObject := RetObject{}
 	ret := u.Service.List()
-
 	if ret == nil && len(ret) == 0 {
 		retObject.Success = false
 		retObject.Message = "未获取到任何数据"
 	} else {
+		retObject.Success = true
+		retObject.Message = ""
 		retObject.Data = ret
 	}
+	klog.Info(retObject)
 	c.JSON(200, retObject)
 }

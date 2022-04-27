@@ -3,7 +3,11 @@ package Conf
 import (
 	"gopkg.in/yaml.v2"
 	"io/ioutil"
-	"log"
+	"k8s.io/klog/v2"
+	"os"
+	"os/exec"
+	"path/filepath"
+	"strings"
 	"time"
 )
 
@@ -50,19 +54,27 @@ type RabbitMQ struct {
 
 func init() {
 	Configs = getConf()
-	log.Println("Config init success")
+	klog.Info(Configs, "Config init success")
 }
 
 func getConf() *Conf {
 	var c *Conf
-	file, err := ioutil.ReadFile("demo.Web.Host/Conf/Config.yml")
-
+	klog.Info(GetAppPath())
+	file, err := ioutil.ReadFile("./demo.Web.Host/conf/Config.yml")
 	if err != nil {
-		log.Println("config error: ", err)
+		klog.Error(err)
 	}
+	klog.Error(c)
 	err = yaml.UnmarshalStrict(file, &c)
 	if err != nil {
-		log.Println("yaml unmarshal error: ", err)
+		klog.Error(err)
 	}
 	return c
+}
+func GetAppPath() string {
+	file, _ := exec.LookPath(os.Args[0])
+	path, _ := filepath.Abs(file)
+	index := strings.LastIndex(path, string(os.PathSeparator))
+
+	return path[:index]
 }
