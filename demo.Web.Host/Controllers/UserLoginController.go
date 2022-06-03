@@ -10,8 +10,8 @@ import (
 )
 
 type UserLoginController struct {
-	User *userService.UserService `inject:""`
-	Jwt  IJWTHelper               `inject:""`
+	*userService.UserService `inject:""`
+	Jwt                      IJWTHelper `inject:""`
 }
 
 // LoginHandler
@@ -26,14 +26,14 @@ type UserLoginController struct {
 func (u *UserLoginController) LoginHandler(c *gin.Context) {
 	var dto UserLoginInputDto
 	c.ShouldBind(&dto)
-	success := u.User.Login(dto)
+	success, userId := u.Login(dto)
 	message := ""
 	token := ""
 	if success {
 		claims := &jwt.UserClaims{}
-		claims.ID = "1"
-		claims.Phone = "17343016071"
-		claims.Name = "17343016071"
+		claims.ID = userId
+		claims.Phone = ""
+		claims.Name = ""
 		token = u.Jwt.GenerateToken(claims)
 	}
 
