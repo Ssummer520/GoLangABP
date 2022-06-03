@@ -16,7 +16,7 @@ type UserRepository struct {
 // FirstOrDefault FirstOrDefault
 func (t *UserRepository) FirstOrDefault(name string, phone string) *UserInfo {
 	var user = &UserInfo{}
-	err := t.SqlDb.DB().Get(user, "select name,phone,age,password from userinfo  where name=? && phone=? limit 1",
+	err := t.SqlDb.DB().Get(user, "select id, name,phone,age,password from userinfo  where name=? && phone=? limit 1",
 		name, phone)
 	if err != nil {
 		klog.Error(err)

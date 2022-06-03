@@ -5,7 +5,7 @@ type UserInfo struct {
 	//Sex   int    `gorm:"sex"`
 	//Age   int    `gorm:"age"`
 	//Phone string `gorm:"phone"`
-
+	Id   string
 	Name string
 	//Sex  int
 	Age      int
