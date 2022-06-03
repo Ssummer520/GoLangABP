@@ -32,8 +32,8 @@ func (u *UserLoginController) LoginHandler(c *gin.Context) {
 	if success {
 		claims := &jwt.UserClaims{}
 		claims.ID = userId
-		claims.Phone = ""
-		claims.Name = ""
+		//claims.Phone = ""
+		//claims.Name = ""
 		token = u.Jwt.GenerateToken(claims)
 	}
 
