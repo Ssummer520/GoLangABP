@@ -2,6 +2,7 @@ package Authentication
 
 import (
 	"GoLangABP/demo.Core/Model"
+	"encoding/json"
 	"fmt"
 	"k8s.io/klog/v2"
 
@@ -78,7 +79,9 @@ func (j *JWTHelper) JwtVerify(c *gin.Context) {
 		return
 	}
 	//验证token，并存储在请求中
-	c.Set("User", j.parseToken(token))
+
+	userStr, _ := json.Marshal(j.parseToken(token))
+	c.Set("User", userStr)
 }
 
 // 解析Token

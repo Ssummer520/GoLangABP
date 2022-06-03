@@ -4,6 +4,8 @@ import (
 	service "GoLangABP/demo.Application/User"
 	. "GoLangABP/demo.Core/Dto"
 	. "GoLangABP/demo.Core/Model"
+	jwt "GoLangABP/demo.Web.Host/Authentication"
+	"encoding/json"
 	"github.com/gin-gonic/gin"
 	"k8s.io/klog/v2"
 )
@@ -55,6 +57,10 @@ func (u *UserController) AddUserNameHandler(c *gin.Context) {
 //@Success 200 object RetObject{data=[]UserListOutPutDto} 成功后返回值
 // @Param Authorization header string false "Bearer 用户令牌"
 func (u *UserController) GetUserListHandler(c *gin.Context) {
+	data, _ := c.Get("User")
+	claims := data.([]byte)
+	var user jwt.UserClaims
+	json.Unmarshal(claims, &user)
 	retObject := RetObject{}
 	ret := u.Service.List()
 	if ret == nil && len(ret) == 0 {
